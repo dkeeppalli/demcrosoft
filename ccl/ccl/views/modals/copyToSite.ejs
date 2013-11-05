@@ -1,0 +1,439 @@
+<%
+	var shareTopicObj = shareObj;
+%>
+<!--Copy topic to site Start-->
+<div id="selectSite" style="display:none;">
+	<div class="modal-header-for-site">
+	  <div class="modal-title">
+	     Select Site
+	  </div>
+	  <p class="clear"/>
+	</div>
+	<p class="copytopic-text">Please select the site where you want to copy this topic:</p>
+	<div>
+	  <div id="siteDropDown">
+	  <% if(sitesObj){%>
+	  <select class="select-sites" id="copySites">
+		<%	var cSites = sitesObj.length;
+			var siteNameObj = null;
+			for(var i = 0; i < cSites; i++){
+			siteNameObj = sitesObj[i];
+		%>
+		<option id="<%= siteNameObj.siteId%>" value="<%= siteNameObj.publishUrl%>"><%= siteNameObj.siteName%></option>
+		<%}%>
+	  </select>
+	  <%}%>
+	  </div>
+	  <div>
+	    <input id="copyToSiteButton" type="button" value="Copy Topic to this Site" class="orange-button copyTopic" />
+	    <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+	  </div>
+	</div>
+</div>
+<!--Copy topic to site Ends-->
+<!--Alert for already copied topic start-->
+<div id="alreadyCopied" style="display:none;">
+	<div class="modal-header">
+	  <div class="alert-div left">
+	    <h3>You've already copied this topic to this site.</h3>
+	  </div>
+	  <p class="clear"/>
+	</div>
+	<p class="copytopic-text">Are you sure you want to copy it again?</p>
+	<div class="buttonsDiv">
+	  <input id="copyTopicAgain" type="button" value="Yes, Copy it Again" class="orange-button copyTopic left" />
+	  <p class="left">Or <a href="javascript:void(0);" id="linkTocancel">Cancel</a></p>
+	  <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+	  <p class="clear"/>
+	</div>
+</div>
+<!--Alert for already copied topic ends-->
+<!--Alert for canot be copied topic start-->
+<div id="cannotCopied" style="display:none;">
+	<div class="modal-header">
+	  <div class="alert-div left">
+	    <h3>This Topic Can't Be Copied to this Site</h3>
+	  </div>
+	  <p class="clear"/>
+	</div>
+	<p class="copytopic-text">
+	  We're sorry, but the <span id="disableTopicType" class="disableTopicType"></span> topic type is
+	  disabled on <span id="siteName"></span>.  If you want to copy this topic, you first need to enable the <span class="disableTopicType" id="enableTopicType"></span> topic type (go to Manage > Site > Preferences).
+	</p>
+	<div class="buttonsDiv">
+	  <p class="left">
+	    <a href="javascript:void(0);" id="linkTocancel">Close Window</a>
+	  </p>
+	  <p class="clear"/>
+	</div>
+</div>
+<!--Alert for canot be copied topic ends-->
+<!--Alert for delete topic start-->
+<div id="deleteTopic" style="display:none;">
+	<div class="modal-header">
+	  <div class="alert-div left">
+	    <h3>Are you sure you want to delete this topic?</h3>
+	  </div>
+	  <p class="clear"/>
+	</div>
+	<p class="copytopic-text">This will delete the topic from the Collaborize Classroom Library, but will have no effect on the topic on any of your Collaborize Classroom sites.</p>
+	<div class="buttonsDiv">
+	  <input id="deleteTopicButton" type="button" value="Yes, Delete the Topic" class="orange-button copyTopic left" />
+	  <p class="left">Or <a href="javascript:void(0);" id="linkTocancel">Cancel</a></p>
+	  <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+	  <p class="clear"/>
+	</div>
+</div>
+<!--Alert for delete topic ends-->
+<!--Alert for need collaborize classroom site start-->
+<div id="createSiteNow" style="display:none;">
+	<div class="modal-header">
+	  <div class="alert-div left">
+	    <h3>You need a Collaborize Classroom site.</h3>
+	  </div>
+	  <p class="clear"/>
+	</div>
+	<p class="copytopic-text">
+	  You no longer have a Collaborize Classroom site.  This may be because the site(s) you participated in were deleted, or the site administrator removed you as a member
+	</p>
+	<p class="copytopic-text">
+	  Not to worry!  You can create your own, FREE Collaborize Classroom site in just a few minutes.
+	</p>
+	<div class="buttonsDiv">
+	  <input id="creatSiteNow" type="button" value="Create My Site Now! »" class="orange-button copyTopic left" />
+	  <p class="clear"/>
+	</div>
+</div>
+<!--Alert for need collaborize classroom site ends-->
+
+<!--show popup for Get Stand-Alone Lesson(WeJIT) and Copy to my Collaborize Classroom Site-->
+<div id="linkPopUp" style="display:none;">
+	<div class="linkToWeJit"><a href="javascript:void(0);" id="weJITLink"  class="weJITLink">Get Stand-Alone Lesson(WeJIT)</a></div>
+	<div class="or">------OR------</div>
+	<div class="linkToCollaborize"><a href="javascript:void(0);" id="collaborizeLink" href="javascript:void(0);" class="collaborizeLink">Copy to my Collaborize Classroom Site</a></div>
+</div>
+<!--Ends-->
+<!-- If logged in then show this linkpopup-->
+<div id="loggedLinkPopUp" style="display:none;">
+  <div class="loggedLinkToWeJit"><a href="javascript:void(0);" id="loggedWeJITLink"  class="loggedWeJITLink">Get Stand-Alone Lesson(WeJIT)</a></div>
+  <div class="or">------OR------</div>
+  <div class="loggedLinkToCollaborize"><a href="javascript:void(0);" id="loggedCollaborizeLink" href="javascript:void(0);" class="loggedCollaborizeLink">Copy to my Collaborize Classroom Site</a></div>
+</div>
+
+<%# Popup header starts here %>
+<div class="wejitLogin" style="display:none;">
+    <div class="popupHeader" >
+      <span class="icons-wejit_logo_small"><img src="../ccl/ccl/img/wejit_logo_small.png"></span>
+      <h6 class="right">Don't have a WeJIT account? <a href="javascript:;" id="wejitSignUpPopupLink">Sign up</a></h6>
+      <p class="clear" />
+    </div>
+    <%# Popup header ends here %>
+    <%# Popup content starts here %>
+    <div class="popupContent" id="signInContainer">
+      <div class="topContent">
+        <h6 class="toYourWeJITAccount"><strong>Sign In</strong> With</h6>
+        <div class="socialNetworkingButtons">
+          <div class="left">
+            <div class="socialNetworkBtnDivs"><span class="textOrder">
+              <img class="social" src="ccl/img/fb_large.png">
+              <a href="javascript:;" class="icons-fb_large" id="wejitFacebook" >Facebook</a></span>
+            </div>
+          </div>
+          <div class="right">
+            <div class="socialNetworkBtnDivs">
+              <img class="social" src="ccl/img/google_large.png">
+              <a href="javascript:;" class="icons-google_large" id="wejitGoogle" >Google</a>
+            </div>
+          </div>
+          <p class="clear" />
+        </div>
+        <!--span class="small">We won't post anything to these services unless you specifically ask us to.</span-->
+      </div>
+      <div class="bottomContent">
+        <div id="signInModal" >
+          <form onsubmit="return false" name="wejitSignInForm" class="signInForm" id="wejitSignInFormClass">
+            <div>
+              <p class="toYourWeJITAccount">Or <strong>Sign in</strong> to your WeJIT account:</p>
+            </div>
+            <div>
+              <label for="wejitEmailId"> Email </label>
+              <input type="text" id="wejitUserName" maxlength="58" class="validate[required,funcCall[inputRequired,emptyEmail],custom[email]]" name="email" />
+              <p class="clear" />
+            </div>
+            <div>
+              <label for="wejitPassword"> Password </label>
+              <input type="password" id="wejitPassword" maxlength="19" class="passwordHide validate[required,funcCall[inputRequired,emptyPassword],minSize[6]]" name="password" />
+              <!-- <input id="wejitSiteType" type="hidden" value="wejit"/> -->
+              <p class="clear" />
+            </div>
+            <div class="wejitForgotPassword">
+             <a href="javascript:;" id="wejitForgotPassword" class="left"> Forgot your password? </a>
+            </div>
+            <div class="signInButtonDiv">          
+              <input type="submit" value="Sign In" id="signInButton" class="right blueButton "/>
+              <div class="right" id="wejitRememberme">
+                <input type="checkbox" checked="checked" id="signInRememberMe" class="left" /> 
+                <label for="signInRememberMe">Remember Me</label>
+              </div>
+              <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+              <p class="clear" />
+            </div>
+          </form>
+        </div>
+        
+        <div id="fgPwdModal" class="hide">
+          <div id="forgotPasswordFeilds">
+            <form id="forgotPasswordForm" onsubmit="return false" name="forgotPasswordForm" class="forgotPasswordForm" >
+              <div>
+                <h6><strong>Forgot your password?</strong></h6>
+              </div>
+              <div>
+                <h6 class="enterEmailInstructions">Enter your email to reset your password.</h6>
+              </div>
+              <div>
+                <label for="wejitForgotEmailId"> Email </label>
+                <input type="text" id="wejitForgotEmailId" maxlength="58" class="validate[required,funcCall[inputRequired,emptyEmail],custom[email]]" name="email" />
+                <p class="clear" />
+              </div>
+              <div class="signInButtonDiv">
+                <a id="backtoLogin" class="backtoLogin left" href="javascript:void(0);" >&laquo; Back to Login</a>
+                <input type="submit" value="Submit" id="submitButton" class="right blueButton"/> 
+                <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+                <p class="clear" />
+              </div>
+            </form>
+          </div>
+
+          <div id="forgotPasswordConfirmation" class="hide">
+              <div>
+                <h6><strong>Forgot your password?</strong></h6>
+              </div>
+              <p class="forgotPasswordInstructions">We've sent you an email with instructions for resetting your password.</p>
+              <p class="forgotPasswordInstructions">If you don't see it in your inbox, please also check your spam or junk folder. </p>
+              <p class="forgotPasswordInstructions">
+                <a class="backtoLogin left" href="javascript:void(0);">&laquo; Back to Login</a>
+                <p class="clear"/>
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!--<div class="iframeContent" style="display:none;">
+<iframe src="http://www.mywejit.com/#!signin">
+
+</iframe>
+</div>-->
+
+<%# Popup header starts here %>
+<div class="wejitSignUp" style="display:none;">
+    <div class="popupHeader">
+      <span class="icons-wejit_logo_small"><img src="../ccl/ccl/img/wejit_logo_small.png"></span>
+      <h6 class="right">Already have a WeJIT account? <a href="javascript:;" id="wejitSignInPopupLink" class="wejitSignInPopupLink">Sign in</a></h6>
+      <p class="clear" />
+    </div>
+    <%# Popup header ends here %>
+    <%# Popup content starts here %>
+    <div class="popupContent">
+      <div class="topContent" align="center">
+       <h6 class="toYourWeJITAccount"><strong>Sign In</strong> With</h6>
+        <div class="socialNetworkingButtons">
+          <div class="left">
+            <div class="socialNetworkBtnDivs">
+              <!-- <a href="javascript:;" class="icons-fb_large" id="wejitRegisterFacebook">Facebook</a> -->
+              <span class="textOrder">
+                  <img style="margin-left: -10px;" class="social" src="ccl/img/fb_large.png">
+                  <a href="javascript:;" class="icons-fb_large" id="wejitFacebook" >Facebook</a>
+            </span>
+            </div>
+          </div>
+          <div class="right">
+            <div class="socialNetworkBtnDivs">
+              <!-- <a href="javascript:;" class="icons-google_large" id="wejitRegisterGoogle">Google</a> -->
+              <img style="margin-left: -32px;" class="social" src="ccl/img/google_large.png">
+              <a href="javascript:;" class="icons-google_large" id="wejitGoogle" >Google</a>
+            </div>
+          </div>
+          <p class="clear" />
+        </div>
+        <!--span class="small">We won't post anything to these services unless you specifically ask us to.</span-->
+      </div>
+        <div class="bottomContent" align="center">
+          <form onsubmit="return false;" name="wejitSignUpForm" class="signUpForm" id="signUpForm">
+            <div class="toYourWeJITAccount">
+              <h6 class="signUpDetails">Or <strong>Sign up</strong> for your FREE WeJIT account:  </h6>
+            </div>
+            <div>
+              <label for="wejitSignUpEmailId"> Email </label>
+              <input type="text" id="wejitSignUpEmailId" class="validate[required,funcCall[inputRequired,emptyEmail],custom[email]]" maxlength="58" name="email" />
+              <p class="clear" />
+            </div>
+            <p class="emailFoundError hide">
+                This email is already registered with an account. Want to 
+                <a href="javascript:;" id="signUpPageSignIn" class="wejitSignInPopupLink">sign in </a> or 
+                <a href="javascript:;" id="signUpPageRecover">recover your password</a>?
+            </p>
+            <div>
+              <label for="wejitFirstName"> Name </label>
+              <input style="margin-right: 10px;width: 46%; float:left;" type="text" id="wejitFirstName" placeholder="First" maxlength="30" class="validate[required,funcCall[inputRequired,emptyFirstName],custom[firstName]] nameField" name="firstName" />
+              <input style="margin-right: 10px;width: 46%; float:left;" type="text" id="wejitLastName" placeholder="Last" maxlength="30" class="validate[required,funcCall[inputRequired,emptyLastName],custom[lastName]] nameField last" name="lastName" />
+              <p class="clear" />
+            </div>
+            <div>
+              <label for="wejitSignUpPassword"> Password </label>
+              <input type="password" id="wejitSignUpPassword" maxlength="19" class="validate[required,funcCall[inputRequired,emptyNewPassword],minSize[6]]" />
+              <p class="clear" />
+            </div>
+            <div class="termsOfUse">
+              <span class="small">By clicking <strong>Sign Up</strong> you agree to our <a href="http://www.democrasoft.com/terms.html" target="_blank">Terms of Use.</a></span>
+            </div>
+            <div class="signUpButtonDiv">
+              <input type="submit" value="Sign Up" id="signUpButton" class="right blueButton"/>
+              <div class="right" id="wejitSignUpRememberme">
+                <input type="checkbox" checked="checked" id="signUpRememberMe" class="left"/> 
+                <label for="signUpRememberMe">Remember Me</label>
+              </div>
+              <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+              <p class="clear" />
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+<%# Popup content ends here %>
+
+
+
+<!--Registration popup start-->
+<div id="copyToSiteRegistration" style="display:none;">
+<div class="modal-header">
+  <div class="modal-title">
+    <img src="ccl/img/logo.png" title="logo" alt="logo" id="logo" width="217" height="44"/>
+  </div>
+  <p class="clear"/>
+</div>
+<p class="title">
+  To get this topic, you need a <strong>Collaborize Classroom</strong> site.
+</p>
+<hr/>
+<h3 class="subtitle">
+  Already have Collaborize Classroom?
+</h3>
+<p>
+  Log in to the Library with your Collaborize Classroom email and password:
+</p>
+<div class="signin-content">
+<form action="/" onsubmit="return false" id="signInFormClass">
+  <div class="sigin-fields" id="copySiteSignInErrorDiv"  style="display:none;">
+    <div class="label">
+      &nbsp;
+    </div>
+    <div class="errorMessage" id="copySiteSignInError">
+      </div>
+    <p class="clear"/>
+  </div>
+  <form action="/" onsubmit="return false" id="signInCopySiteFormClass">
+  <div class="sigin-fields">
+    <div class="label">
+      Email:
+    </div>
+    <div class="field">
+      <input id="userName" type="text" class="validate[required,funcCall[inputRequired,emptyEmail],custom[email]] text-input" name="email"/>
+    </div>
+    <p class="clear"/>
+  </div>
+  <div class="sigin-fields">
+    <div class="label">
+      Password:
+    </div>
+    <div class="field">
+      <input id="password" type="password" class="validate[required,funcCall[inputRequired,emptyPassword] text-input"/>
+      <!-- <input id="siteType" type="hidden" value="cc"/> -->
+    </div>
+    <p class="clear"/>
+  </div>
+  <div class="buttons">
+    <input id="signInButton" type="submit" value="Sign In" class="orange-button small-button" />
+    <a id="linkToForgotPassword" href="javascript:void(0);" class="marginLeft92">Forgot your password?</a>
+    <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+	<p class="clear"/>
+  </div>
+  </form>
+</div>
+<div class="footerMessage">
+  <div class="span-8 last">
+    <p class="footer-subtitle">
+      Don't have Collaborize Classroom yet?
+    </p><a href= "<%= ccl.bundle.classroomURL%>/ccl_account.php?step=1&page=topic" target="_blank" id="createSite">Learn more about this free online learning platform!</a>      
+  </div>
+  <div class="create-button">
+    <a href= "<%= ccl.bundle.classroomURL%>/ccl_account.php?step=2&page=topic" target="_blank" id="createSiteButton">
+      <img src="ccl/img/createsite.png" alt="createsite" width="158px" height="51px"/>
+    </a>
+  </div>
+</div>
+</div>
+<div id="forgotPasswordModal" style="display:none;">
+  <div class="modal-title">
+    Forgot Password
+  </div>
+  <p class="clear"/>
+  <div id="forgotPasswordFeildsCopyToSite">
+  <p> Enter your email address and we'll send you instructions for resetting your password.</p>
+	  <div class="signin-content">
+	     <form id="forgotPasswordFormClass" method="post" action="" >
+		    <div class="sigin-fields">
+		      <div class="label">
+			Email:
+		      </div>
+		      <div class="field">
+			<input id="email" type="text" value="" class="validate[required,funcCall[inputRequired,emptyEmail],custom[email]] text-input" name="email"/>
+		      </div>
+		      <p class="clear"/>
+		    </div>
+		    <div class="buttons">
+		      <a id="backtoLogin" class="backtoLogin left" href="javascript:void(0);" >&laquo; Back to Login</a>
+			  <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+		      <input id="submitButton" type="button" value="Submit" class="orange-button submitbutton left" />
+			  <p class="clear"/>
+		    </div>
+	      </form>
+	  </div> 
+  </div>  
+  <div id="forgotPasswordConfirmationCopyToSite" style="display:none;">
+	    <div class="forgotPasswordConfirmation">We've sent you an email with instructions for resetting your password.</div>
+		<div class="forgotPasswordConfirmation">If you don't see it in your inbox,please also check your spam or junk folder. </div>
+	    <div>
+	      <a class="backtoLogin left" href="javascript:void(0);">&laquo; Back to Login</a>
+	      <p class="clear"/>
+	    </div>
+  </div>     
+</div>
+<!--Alert for need collaborize classroom site End-->
+<!--Popup Blocker start-->
+<div id="popupBlocker" style="display:none;">
+  <div class="modal-header">
+    <div class="modal-title">
+      Your Browser is Blocking Pop-Ups
+    </div>
+    <p class="clear"/>
+  </div>
+  	<p class="popupBlockerText">
+	  Your browser is set to block pop-up windows, which will prevent you from copying topics to your Collaborize Classroom site.
+	</p>
+	<p class="popupBlockerText">
+	  <strong>To address this, you need to allow pop-ups for <%=location.hostname%>.</strong>
+	</p>
+	<p class="popupBlockerText">
+	  The steps for doing this are different for each browser.&nbsp; If your browser is displaying a "Pop-up blocked" message or icon at the top of the screen, click on it &mdash; it will give you the option to allow pop-ups for this site (you'll only have to do this once).
+	</p>
+	<div>
+	  <a href="javascript:void(0);" id="linkTocancel" class="popupBlockerCancel">Close Window</a>
+	</div>
+</div>
+<!--Popup Blocker End-->
+
+
+<div id="loaderimage" style="display:none;">
+<%=ccl.bundle.LOADER_HTML%>
+</div>

@@ -1,0 +1,70 @@
+<%# Popup header starts here %>
+<div class="popupHeader">
+  <span class="icons-wejit_logo_small">wejit small logo</span>
+  <h6 class="right">Already have a WeJIT account? <a href="javascript:;" id="wejitSignInPopupLink" class="wejitSignInPopupLink">Sign in</a></h6>
+  <p class="clear" />
+</div>
+<%# Popup header ends here %>
+<%# Popup content starts here %>
+<div class="popupContent">
+  <div class="topContent" align="center">
+   <h6><strong>Sign In</strong> With</h6>
+    <div class="socialNetworkingButtons" align="center">
+      <div class="left">
+        <div class="socialNetworkBtnDivs">
+          <a href="javascript:;" class="icons-fb_large" id="wejitRegisterFacebook">Facebook</a>
+        </div>
+      </div>
+      <div class="right">
+        <div class="socialNetworkBtnDivs">
+          <a href="javascript:;" class="icons-google_large" id="wejitRegisterGoogle">Google</a>
+        </div>
+      </div>
+      <p class="clear" />
+    </div>
+    <!--span class="small">We won't post anything to these services unless you specifically ask us to.</span-->
+  </div>
+  <div class="wejitsignUp" style="display:none;">
+    <div class="bottomContent" align="center">
+      <form onsubmit="return false;" name="wejitSignUpForm" class="signUpForm" id="signUpForm">
+        <div>
+          <h6>Or <strong>Sign up</strong> for your FREE WeJIT account:  </h6>
+        </div>
+        <div>
+          <label for="wejitSignUpEmailId"> Email </label>
+          <input type="text" id="wejitSignUpEmailId" class="validate[required,funcCall[inputRequired,emptyEmail],custom[email]]" maxlength="58" name="email" />
+          <p class="clear" />
+        </div>
+        <p class="emailFoundError hide">
+            This email is already registered with an account. Want to 
+            <a href="javascript:;" id="signUpPageSignIn" class="wejitSignInPopupLink">sign in </a> or 
+            <a href="javascript:;" id="signUpPageRecover">recover your password</a>?
+        </p>
+        <div>
+          <label for="wejitFirstName"> Name </label>
+          <input type="text" id="wejitFirstName" placeholder="First" maxlength="30" class="validate[required,funcCall[inputRequired,emptyFirstName],custom[firstName]] nameField" name="firstName" />
+          <input type="text" id="wejitLastName" placeholder="Last" maxlength="30" class="validate[required,funcCall[inputRequired,emptyLastName],custom[lastName]] nameField last" name="lastName" />
+          <p class="clear" />
+        </div>
+        <div>
+          <label for="wejitSignUpPassword"> Password </label>
+          <input type="password" id="wejitSignUpPassword" maxlength="19" class="validate[required,funcCall[inputRequired,emptyNewPassword],minSize[6]]" />
+          <p class="clear" />
+        </div>
+        <div class="termsOfUse">
+          <span class="small">By clicking <strong>Sign Up</strong> you agree to our <a href="http://www.democrasoft.com/terms.html" target="_blank">Terms of Use.</a></span>
+        </div>
+        <div class="signUpButtonDiv">
+          <input type="submit" value="Sign Up" id="signUpButton" class="right blueButton"/>
+          <div class="right" id="wejitSignUpRememberme">
+            <input type="checkbox" checked="checked" id="signUpRememberMe" class="left"/> 
+            <label for="signUpRememberMe">Remember Me</label>
+          </div>
+          <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+          <p class="clear" />
+        </div>
+      </form>
+    </div>
+  </div>  
+</div>
+<%# Popup content ends here %>

@@ -1,0 +1,132 @@
+<%
+	var userOptions = userdata;
+	var extraInfo = userdata._extraInfo;
+	var sortOptionsObj = sortOptionsObj;
+	
+%>
+<div id="profileInfo">
+	<img src="<%= userOptions.large_image_url%>+'?'+<%=new Date().getTime()%>" alt="profile image" width="41px" height="40px"/>
+	<h1 id="screenName"><%= userOptions.screen_name%></h1>
+	<h3>(<%= extraInfo.fullName %>)</h3>
+	<%if(extraInfo.isOwner){%>
+		<span>This is you</span>
+		<span>|</span>
+		<a href="javascript:void(0);" id="editProfile">Edit your profile</a>
+	<%}%>	
+  <p class="clear"/>
+</div>
+<div id="profileInfo">
+  <ul class="column span-7">
+    <li>
+      <span class="profileSubCategory">Name:</span> <span class="profileSubCategoryValue"><%= extraInfo.fullName %></span>
+    </li>
+<%if(userOptions.school){%>
+    <li>
+      <span class="profileSubCategory">School:</span> <span class="profileSubCategoryValue"><%= userOptions.school%></span>
+    </li>
+<%}if(userOptions.role){%>
+    <li>
+      <span class="profileSubCategory">Role:</span> <span class="profileSubCategoryValue"><%= userOptions.role%></span>
+    </li>
+<%}%>
+  </ul>
+  <ul class="column span-7">
+<%if(userOptions.location){%>
+    <li>
+      <span class="profileSubCategory">Location:</span> <span class="profileSubCategoryValue"><%= userOptions.location%></span>
+    </li>
+<%}if(userOptions.website_blog){%>
+    <li>
+      <span class="profileSubCategory">Website/Blog:</span>
+      <a href="http://<%= userOptions.website_blog%>" target="_blank" class="span-3"><%= userOptions.website_blog%></a>
+    </li>
+<%}%>
+    <li>
+      <span class="profileSubCategory">Member Since:</span> <span class="profileSubCategoryValue memberSince"><%= userOptions.member_since%></span>
+    </li>
+  </ul>
+  <% if(userOptions.shared_topic_count > 0){%>
+  <ul class="column columns_7">
+  <li class="right sharedTopics">
+  	<span class="sharedtopics"><%= userOptions.shared_topic_count%></span>
+  	<span class="sharedtopicstext">shared topics</span>
+  </li>
+  </ul>
+  <%}%>
+  <p class="clear"/>
+</div>
+<div class="span-20 topicLayoutContaniner" id="topicListingPage">
+	<%if(extraInfo.isOwner){%>
+		<h3 class="topicsCount left">
+		  My Topics
+		  <%if(extraInfo.totalTopicsCount > 0){%> 
+			  <span class="count">
+			    (<%= extraInfo.totalTopicsCount %>)
+			  </span>
+		  <%}%>	
+	    </h3>
+		  <% var aLinks = [];
+		  	aLinks.push('<a href="javascript:void(0);" class="sortLinks sortSelectedLink" name="all">All</a>');
+		  	if(userOptions.shared_topic_count > 0){
+		  		aLinks.push('<a href="javascript:void(0);" class="sortLinks" name="shared">Shared</a> <span class="count">(' + userOptions.shared_topic_count + ')</span>');
+		  	}
+		  	if(userOptions.private_topic_count > 0){
+		  		aLinks.push('<a href="javascript:void(0);" class="sortLinks" name="archive">Private</a> <span class="count">(' + userOptions.private_topic_count + ')</span>');
+		  	}
+		  %>
+		  <%if(userOptions.private_topic_count > 0 && userOptions.shared_topic_count > 0){%> 
+			  <span class="count">Show:</span> <%= aLinks.join(" | ")%>
+		  <%}%>		  	  
+		  
+	<%}else{%>
+		<h3 class="topicsCount">
+			Shared Topics
+		  <%if(extraInfo.totalTopicsCount > 0){%> 
+			  <span class="count">
+			    (<%= extraInfo.totalTopicsCount %>)
+			  </span>
+		  <%}%>
+		</h3>
+	<%}%>
+	<p class="clear"/>
+	<%if(extraInfo.totalTopicsCount > 1){%>
+		<div id="sortByContainer">
+			<div class="count left sortText">Sort by:</div>
+			<div class="left">
+				<select id="sortByOptions">
+				<% for(var i=0; i<sortOptionsObj.length; i++){ %>
+					<option id="<%=sortOptionsObj[i].value%>">
+						<%=sortOptionsObj[i].label%>
+					</option>
+				<% } %>
+				</select>
+			</div>
+			<p class="clear"/>
+		</div>
+	<%}%>
+</div>
+<p class="clear"/>
+<div id="listContainer">
+ <%if(extraInfo.totalTopicsCount > 0){%> 
+	<div id="listContainerData"><div class="loadingIcon">Loading...</div></div>
+	<p class="clear" />
+<%}else{%>
+		  <p class="clear"/>
+		  <div class="span-20 topicLayoutContaniner" id="topicListingPage">
+		  <%if(extraInfo.isOwner){%>
+			  <p>You haven't published any topics to the library yet.</p>
+		  <%}else{%>
+			  <p><%= userOptions.screen_name%> hasn't shared any topics in the library.</p>
+		  <%}%>
+		  </div>
+<%}%>
+	
+	<div class="pagination" id="fetchinDataDiv" style="display:none;">
+		<img src="/ccl/img/loading.gif" width="18" height="18" border=0/>
+	</div>
+	<a href="javascript:void(0);" id="paginationButton" style="display:none;">
+		<div class="pagination" id="pagination">
+		</div>
+	</a>
+</div>
+

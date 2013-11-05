@@ -1,0 +1,41 @@
+<% 
+	var cSites = userDetails.sites.length;
+	var siteNameObj = null;
+	sitesObj = userDetails.sites
+%>
+<div id="loggedInOptions">
+    <div>
+    Signed in as <a href="#!/profile/<%=ccl.utils.encodePredefinedChars(userDetails.user.screenName)%>" class="linkToProfile"><%= userDetails.user.screenName %></a> | <a href="#!" class="linkToHome">Home</a> | <a href="#" class="linkToSignOut">Sign Out</a>
+  </div>
+  <div>
+   <% if(cSites == 0){%>
+     <div class="left">
+		<a href="javascript:void(0);" id="createNewSite">Create your FREE Collaborize Classroom site now!</a>
+     </div>
+    <%}else if(cSites == 1){%>
+    <div class="right">
+	 Your Collaborize Classroom: <a href="javascript:void(0);" class="listsites sites" name="<%= userDetails.sites[0].publishUrl%>"><span><%= userDetails.sites[0].siteName%></span></a>
+    </div>
+    <%}else{%>
+    <div class="right">
+	<dl class="dropdown">
+	<dt>
+	<a href="javascript:void(0);" id="listsites" class="listsites downArrow"><span>Your Collaborize Classroom Sites</span></a>
+	<p class="clear" />
+	</dt>
+	<dd>
+	   <ul>
+		<%for(var i = 0; i < cSites; i++){%>
+		 <%
+	    		siteNameObj = userDetails.sites[i];
+		 %>
+		<li><a href="javascript:void(0);" class="sites" name="<%= userDetails.sites[i].publishUrl%>"><%=siteNameObj.siteName%></a></li>
+		<%}%>
+	    </ul>
+	</dd>
+	</dl>
+    </div>
+  <%}%>
+  </div>
+</div>
+

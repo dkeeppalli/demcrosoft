@@ -1,0 +1,101 @@
+<%
+	var shareTopicObj = shareObj;
+%>
+<!--Share topic to site Start-->
+<div id="shareTopic">
+	<div class="modal-header-for-site margin-bottom10">
+	  <div class="modal-title">
+		Share This Topic
+	  </div>
+	  <p class="clear"/>
+	  <div class="shareTopicTag">
+	  	Share this topic with the community of educators on the Collaborize Classroom Library.
+	  </div>
+	</div>
+	<div class="shareTopicTitle margin-bottom10">
+		<div class="left <%=shareTopicObj.Topic_type_id %> textIndent"><%=shareTopicObj.Topic_type_id %></div>
+		<div class="left span-10"><%= ccl.utils.escapeSpecialCharacters(shareTopicObj.topic_title)%></div>
+		<p class="clear"/>
+	</div>
+	<div class="margin-bottom10">
+		<div class="left">
+			<h6><strong>Select Subject(s)</strong></h6>
+			<div class="selectList margin-bottom10 margin-right40">		
+				<ul id="listOfSSub">
+					<li><input type="checkbox" name="englishreading" value="English &amp; Language Arts" />English &amp; Language Arts</li>
+					<li><input type="checkbox" name="historySocialStudies" value="History &amp; Social Studies" />History &amp; Social Studies</li>
+					<li><input type="checkbox" name="mathIcon" value="Math" />Math</li>
+					<li><input type="checkbox" name="scienceTechnology" value="Science &amp; Technology" />Science &amp; Technology</li>
+					<li><input type="checkbox" name="languages" value="Foreign Languages" />Foreign Languages</li>
+					<li><input type="checkbox" name="healthLifeskills" value="Health &amp; Life Skills" />Health &amp; Life Skills</li>
+					<li><input type="checkbox" name="businessEconomics" value="Business &amp; Economics" />Business &amp; Economics</li>
+					<li><input type="checkbox" name="philosophyReligion" value="Philosophy &amp; Religion" />Philosophy &amp; Religion</li>
+					<li><input type="checkbox" name="visualPerformingArts" value="Visual &amp; Performing Arts" />Visual &amp; Performing Arts</li>
+					<li class="noborder"><input type="checkbox" name="crossCurricular" value="Cross Curricular" />Cross Curricular</li>
+				</ul>
+			</div>
+			<div id="sSubjectsError" class="errorMessage " style="display:none;"></div>
+		</div>
+		<div class="left">
+			<h6><strong>Select Grade Level(s)</strong></h6>
+			<div class="selectList margin-bottom10">
+				<ul id="listOfSGrds">
+					<li><input type="checkbox" value="Higher Education" name="higherEducation">Higher Education</li>
+					<li><input type="checkbox" value="Grades 11-12" name="grades11-12">Grades 11-12</li>
+					<li><input type="checkbox" value="Grades 9-10" name="grades9-10">Grades 9-10</li>
+					<li><input type="checkbox" value="Grades 7-8" name="grades7-8">Grades 7-8</li>
+					<li><input type="checkbox" value="Grades 5-6" name="grades5-6">Grades 5-6</li>
+					<li><input type="checkbox" value="Grades 3-4" name="grades3-4">Grades 3-4</li>
+					<li><input type="checkbox" value="Grades 1-2" name="grades1-2">Grades 1-2</li>
+					<li><input type="checkbox" value="Preschool/Kindergarten" name="preschoolkindergarten">Preschool/Kindergarten</li>
+					<li class="noborder"><input type="checkbox" value="Professional Development" name="professionalDevelopment">Professional Development</li>
+				</ul>
+			</div>
+			<div id="sGradesError" class="errorMessage" style="display:none;"></div>
+		</div>
+		<p class="clear"/>
+	</div>
+	<% if(shareTopicObj.inspired_by){%>
+	<div class="margin-bottom10">
+		<div class="derivativeTopicNote alert-div"><!--orange-note starts -->
+			<h3 class="left">&nbsp;</h3>
+			<div class="derivativeTopicText">
+				<div>This topic is based on a topic that was authored by another educator from the Collaborize Classroom community, and will be noted as such in the Library.</div>
+				<div class="paddingtop22">Please use the space below to describe what changes you made to this version of the topic (these comments will be posted along with your topic).</div>
+				<textarea id="sAuthorDataArea"></textarea>
+			</div>
+			 <div class="clear"></div>
+		  </div>
+	</div>
+	<%}else{%>
+	<div class="margin-bottom10">
+		<h6><strong>Add an Author's Note </strong>(optional)</h6>
+		<div class="shareTopicTag">
+			Describe this topic for your fellow educators. Let them know how and why you've had success with it in your Collaborize Classroom.
+		</div>
+		<textarea id="sAuthorDataArea" class="margin-bottom10 authorNote"></textarea>
+	</div>
+	<%}%>
+	
+	<div class="margin-bottom10">
+		<h6><strong>Add Tags </strong>(optional)</h6>
+		<div class="shareTopicTag">
+			Adding one or more tags will help other educators find this topic in the Library.
+		</div>
+		<div  id="boxTagShareTopic" class="boxTags buttonsDiv">
+			<input type="hidden" id="hiddenTagsShare" />
+			<ul id="ulTags" class="tagsul">
+			<li id="newTagInputShareTopic" class="newTagInput"> <input type="text"  id="inputTagShareTopic" class="hint" value="" /> </li>
+			 </ul>
+			<p class="clear" />
+		</div>
+	</div>
+	<div class="buttonsDiv">
+	    <input id="shareTopicButton" type="button" value="Share Topic" class="orange-button copyTopic right" />
+	    <p class="right"><a href="javascript:void(0);" id="linkTocancel">Cancel</a></p>
+	    <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+	    <p class="clear"/>
+	</div>
+
+</div>
+<!--Share topic to site Ends-->

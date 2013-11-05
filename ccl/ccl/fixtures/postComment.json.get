@@ -1,0 +1,6 @@
+﻿{
+    "response": {
+        "stat": "ok",
+	"result" : {"comment_id": 10}
+    }
+}

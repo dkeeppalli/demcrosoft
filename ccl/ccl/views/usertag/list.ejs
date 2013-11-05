@@ -1,0 +1,49 @@
+<ul id="tagList">
+<% 
+	var cUserTags = usertags.length;
+	var userTagObj = null;
+	var fontSize;
+	var textColor;
+	var tagGroupClassName;
+%>
+<% 
+var tagFonts = {
+	tag_freq_precent_100 : {"color": "#0B3875", "fontsize": "2.8em"},
+	tag_freq_precent_90  : {"color": "#114285", "fontsize": "2.6em"},
+	tag_freq_precent_80  : {"color": "#1A4C97", "fontsize": "2.4em"},
+	tag_freq_precent_70  : {"color": "#2355AD", "fontsize": "2.2em"},
+	tag_freq_precent_60  : {"color": "#3366CC", "fontsize": "2em"},
+	tag_freq_precent_50  : {"color": "#3E6CCC", "fontsize": "1.8em"},
+	tag_freq_precent_40  : {"color": "#4f7ad2", "fontsize": "1.6em"},
+	tag_freq_precent_30  : {"color": "#5f8bda", "fontsize": "1.4em"},
+	tag_freq_precent_20  : {"color": "#709de3", "fontsize": "1.2em"},
+	tag_freq_precent_10  : {"color": "#82b1ec", "fontsize": "1em"}
+};
+
+var allFrequencies = [];
+for(var i = cUserTags-1; i >= 0 ; i--){ 
+	allFrequencies.push(usertags[i].tag.frequency);
+}
+var maxFreq = Math.max.apply( Math, allFrequencies );
+
+for(var i = 0; i < cUserTags; i++){
+	userTagObj =  usertags[i].tag;
+	
+	var percentage = 100;
+	if(userTagObj.frequency < maxFreq){
+		percentage = Math.round(((userTagObj.frequency*100)/maxFreq)/10)*10;
+	}
+	if(percentage <= 0) percentage = 10;
+	
+	fontSize = tagFonts["tag_freq_precent_"+percentage].fontsize;
+	textColor = tagFonts["tag_freq_precent_"+percentage].color;
+	
+	//console.log(userTagObj.frequency + " == " + percentage + " == " + fontSize + " == " + textColor)
+	
+	tagGroupClassName = (userTagObj.frequency / 10 < 1) ? 1 : (userTagObj.frequency / 10 > 2) ? 3 : 2;
+	%>
+	<li>
+		<a href="#<%= userTagObj.name%>" id="<%= userTagObj.id%>" style="font-size:<%= fontSize%>; color:<%= textColor%>;"><%=userTagObj.name%></a>
+	</li>
+<%}%>
+</ul>

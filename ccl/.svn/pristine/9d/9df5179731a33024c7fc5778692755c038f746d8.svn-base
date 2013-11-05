@@ -1,0 +1,71 @@
+<%
+	var searchOptions = searchOptions;
+	var searchOn = searchOptions.searchOn; 
+	var activeTab = (searchOptions.tab == "topics" || searchOptions.tab == "users") ? searchOptions.tab : "topics";
+	
+%>
+<div class="searchTab span-20">
+	<div class="searchTabOptions">
+		<form id="searchForm" action="/">
+			<h3 class="left">Search for </h3>
+			<input id="topicsFinderText" type="text" class="left span-6" value="<%= ccl.utils.unescapePreDefinedCharactersWithHTMLForSearch(searchOptions.searchFor) %>" />
+			<h4 class="left">in</h4>
+			<select id="searchByOptions" class="left">
+				<option id="all" <%=(searchOn == "all")? 'selected="selected"' : ''%>>Everything</option>
+				<option id="topics" <%=(searchOn == "topics")? 'selected="selected"' : ''%>>Topics</option>
+				<option id="users" <%=(searchOn == "users")? 'selected="selected"' : ''%>>Users</option>
+			</select>
+			<a id="searchButton" href="javascript:;" class="searchButton left span-2">Search</a>
+			<p class="clear" />
+		</form> 
+	</div>
+</div>
+<p class="clear" />
+<div id="searhResultsLoader"></div>
+
+<div id="mainSearchResultsSection" style="display:none">
+	<%if(searchOn == "all"){%>
+		<div class="searchTabs tabs">
+		    <a href="javascript:;" id="topics" <%if(activeTab=="topics"){%>class="active"<%}%>>Topics<span> (</span><span id="searchTopicsCount">0</span><span>)</span></a>
+		    <a href="javascript:;" id="users"  <%if(activeTab=="users"){%>class="active"<%}%>>Users <span>(</span><span id="searchUsersCount">0</span><span>)</span></a>
+		</div>
+		<div class="searchTabsContainer">
+	<%}%>
+			<p class="clear" />
+			<div id="listContainer" <%if(searchOn == "all"){%>class="listContainer"<%}%>>
+				<div>
+					<div id="topicsListContainerData" style="display:none" class="span-20 topicLayoutContaniner">
+						<div class="topicListContent">
+						</div>
+						<p class="clear" />
+						<div class="listFooter">
+							<div class="pagination" id="fetchinDataDiv" style="display:none;">
+								<img src="/ccl/img/loading.gif" width="18" height="18" border=0/>
+							</div>
+							<a href="javascript:;" id="topicsPaginationButton" class="paginationButton" style="display:none;">
+								<div class="pagination"  id="topicsPagination"></div>
+							</a>
+						</div>						
+					</div>
+					<div id="usersListContainerData" style="display:none" class="span-20 topicLayoutContaniner">
+						<div class="userListContent">
+						</div>
+						<p class="clear" />
+						<div class="listFooter">
+							<div class="pagination" id="fetchinDataDiv" style="display:none;margin-bottom:5px;">
+								<img src="/ccl/img/loading.gif" width="18" height="18" border=0/>
+							</div>
+							<a href="javascript:;" id="usersPaginationButton" class="paginationButton" style="display:none;">
+								<div class="pagination" id="usersPagination"></div>
+							</a>
+						</div>	
+					</div>
+				</div>
+				
+			<p class="clear" />	
+				
+			</div>
+	<%if(searchOn == "all"){%>
+		</div>
+	<%}%>
+</div>

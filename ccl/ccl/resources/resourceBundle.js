@@ -1,0 +1,145 @@
+var ccl = window.ccl  = ccl || {};
+ccl.bundle = ccl.bundle || {};
+ccl.bundle.LOADER_HTML = '<div class="loadingIcon">Loading...</div>';
+ccl.bundle.COMMENTS_LOADER_HTML = '<div class="loadingIcon">Loading comments...</div>';
+ccl.bundle.TOPICS_PAGINATION_LABEL = "<strong>Show {0} More</strong> ({1} - {2} of {3})";
+
+ccl.bundle.autoLoginURL = "http://collaborize.collaborizeclassroom.com";
+//ccl.bundle.autoLoginURL = "http://collaborize.collaborizeinfrastructure3.com";
+
+ccl.bundle.classroomURL = "http://www.collaborizeclassroom.com";
+//ccl.bundle.classroomURL = "http://www.collaborizeinfrastructure3.com";
+
+
+ccl.bundle.siteCreationStep2URL = "http://collaborize.collaborizeclassroom.com/portal/portal/Democrasoft/MY+ACCOUNT/MY+ACCOUNT?action=2&isheadershow=false&ccback=ccback&site=ccstep1&unId=";
+//ccl.bundle.siteCreationStep2URL = "http://collaborize.collaborizeinfrastructure3.com/portal/portal/Democrasoft/MY+ACCOUNT/MY+ACCOUNT?action=2&isheadershow=false&ccback=ccback&site=ccstep1&unId=";
+	
+	
+ccl.bundle.copyToSiteURL = "http://collaborize.collaborizeclassroom.com/portal/portal/collaborize/site/window?action=2&actionEvent=downloadTopicFromCCL&fpg=1&unId=";	
+//ccl.bundle.copyToSiteURL = "http://collaborize.collaborizeinfrastructure3.com/portal/portal/collaborize/site/window?action=2&actionEvent=downloadTopicFromCCL&fpg=1&unId=";
+
+ccl.bundle.coockieDomain = "collaborizeclassroom.com";
+//ccl.bundle.coockieDomain = "collaborizeinfrastructure3.com";
+
+ccl.bundle.commentsSortOptions = {"options": [
+    											{
+    													"label": "Date (newest first)"
+    												,	"value": "date_desc"
+    											}
+    											,
+    											{
+    													"label": "Date (oldest first)"
+    												,	"value": "date_asc"
+    											}
+    										]
+    										,	"defaultOption": "date_desc"
+    									};
+ccl.bundle.searchPageValues = {		"all"	 : "all"
+								 ,	"users" : "search_users"
+								 ,	"topics": "search_topics"
+							  };
+
+ccl.bundle.topicsSortOptions = {
+									"options": [
+	    										    {
+															"label": "Date Published (newest first)"
+														,	"value": "date_added"
+													}
+	    											, {
+	    													"label": "Most Downloads"
+	    												,	"value": "most_downloaded"
+	    											}
+	    											, {
+															"label": "Top Rated"
+														,	"value": "top_rated"
+													}
+	    										]
+    										,	"defaultOption": "date_added"
+    							};
+
+ccl.bundle.searchTopicsSortOptions = {
+										"options": [
+													    {
+																"label": "Most Relevant"
+															,	"value": "most_relevant"
+														}
+													    , {
+													    		"label": "Date Published (newest first)"
+															,	"value": "date_added"
+														}
+														, {
+																"label": "Most Downloads"
+															,	"value": "most_downloaded"
+														}
+														, {
+																"label": "Top Rated"
+															,	"value": "top_rated"
+														}
+													]
+												,	"defaultOption": "most_relevant"
+									};
+
+ccl.bundle.usersSortOptions = {
+									"options": [
+													{
+															"label": "Screen Name"
+														,	"value": "screen_name"
+													}
+													, {
+															"label": "First Name"
+														,	"value": "first_name"
+													}
+													, {
+															"label": "Last Name"
+														,	"value": "last_name"
+													}
+												]
+											,	"defaultOption": "screen_name"
+								};
+ccl.bundle.downloadedUsersSortOptions = {
+											"options": [
+															{
+																	"label": "Date Downloaded"
+																,	"value": "date_downloaded"
+																,   "sortOrder":"desc"	
+															}
+															, {
+																	"label": "Screen Name"
+																,	"value": "screen_name"
+																,   "sortOrder":"asc"
+															}
+															, {
+																	"label": "First Name"
+																,	"value": "first_name"
+																,   "sortOrder":"asc"
+															}
+															, {
+																	"label": "Last Name"
+																,	"value": "last_name"
+																,   "sortOrder":"asc"
+															}
+														]
+													,	"defaultOption": "date_downloaded"
+										};
+ccl.bundle.disableCopyText = {		"yesorno" : "yes or no"
+ 								,	"multiplechoice" : "multiple choice"
+								,	"voteorsuggest": "vote or suggest"
+								,   "forum" : "forum"
+ 							};
+
+ccl.bundle.roleText = "ex. 10th Grade English Teacher";
+ccl.bundle.locationText = "ex. Santa Rosa, CA"; 
+
+
+ccl.bundle.label = ccl.bundle.label || {};
+
+ccl.bundle.label.home = "Home";
+ccl.bundle.label.browseTopicsBy = "Browse Topics by";
+ccl.bundle.label.topicsFrom = "Topics from";
+ccl.bundle.label.searchResultsFor = "Search Results for";
+ccl.bundle.label.enterComments = "Please enter the comment before posting!";
+ccl.bundle.label.previous = "Previous";
+ccl.bundle.label.next = "Next";
+ccl.bundle.label.copyToMySite = "Copy to My Site";
+//ccl.bundle.copyToWejitURL="www.collaborizeinfrastructure3.com/classroom/api";
+ccl.bundle.copyToWejitURL="http://192.168.200.149:8080/classroom/api";

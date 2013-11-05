@@ -1,0 +1,53 @@
+<% 
+	var cComments = commentsDetails.length;
+	var commentText = (cComments == 1 ? "Comment" : "Comments");
+%>
+<div class="comments_count_sort">
+	<%if(cComments > 0){%>
+	<div class="comments_count_sort_left_cell left"><b><%= cComments%> <%= commentText%></b></div>
+	<%}if(cComments > 1){%>
+	<div class="comments_count_sort_right_cell right">
+		<span class="left">Sort by:</span> 
+		<select class="left" id="comment_sort_dropdown">
+			<% for(var i=0; i<sortOptionsObj.length; i++){ %>
+				<option value="<%=sortOptionsObj[i].value%>" <%=(sortOptionsObj[i].value == sortOptionsSelectKey? "selected" : "" )%> >
+					<%=sortOptionsObj[i].label%>
+				</option>
+			<% } %>
+		</select>
+		<p class="clear" />
+	</div>
+	<%}%>
+	<p class="clear" />
+</div>
+<% for(var i= 0; i < cComments; i++){
+	var commentsObj = commentsDetails[i].comment;
+%>
+	<div>
+		<div class="comments_userProfile">
+			
+			<div class="left">
+				<a href="#!/profile/<%=ccl.utils.encodePredefinedChars(commentsObj.comment_author.screen_name)%>">
+					<img width="41px" height="40px" src="<%= commentsObj.comment_author.large_image_url%>+'?'+<%=new Date().getTime()%>" align="absmiddle" />
+				</a>
+			</div>
+			<div class="left">
+				<div>
+					<a href="#!/profile/<%=ccl.utils.encodePredefinedChars(commentsObj.comment_author.screen_name)%>">
+						<%= commentsObj.comment_author.screen_name%>
+					</a>
+				</div>
+				<div class="gray_color"><%= commentsObj.comment_created_date%></div>
+			</div>
+			 <p class="clear"></p>   
+		</div>
+		<div class="comments_commentText">
+			<% if(commentsObj.comment_text) {%> 
+			<%= ccl.utils.unescapePreDefinedCharactersForCommentsWithHTML(ccl.utils.nl2br(ccl.utils.convertGtLt(commentsObj.comment_text)))%>
+			<%} %>
+				
+		</div>
+	</div>
+<%
+}
+%>

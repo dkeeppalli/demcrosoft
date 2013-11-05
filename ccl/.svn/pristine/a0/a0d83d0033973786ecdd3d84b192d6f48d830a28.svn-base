@@ -1,0 +1,189 @@
+	<%
+		if(isLoggedIn){
+			var oUserPref = $.cookie(isLoggedIn.screenName + "_userPref");
+			var bUserPref = true;
+			if(oUserPref != null){
+				bUserPref = oUserPref.gettingStartedNote.visible;
+			}
+		}
+		
+	%>
+	
+	
+	<div id="homePage">
+                <!-- Main Content Area Start -->
+                <%
+					if(isLoggedIn){
+				%>
+                <div class="margin-bottom20" id="welcomeNoteSection">
+	                <div class="profileImage left">
+	                	<img src="<%=isLoggedIn.gravatorUrl%>+'?'+<%=new Date().getTime()%>"  alt="profile image" width="41px" height="40px"/>
+	                </div>
+	                <h1 class="welcomeNote left">
+	                	Welcome, <a href="#!/profile/<%=ccl.utils.encodePredefinedChars(isLoggedIn.screenName)%>"><%= isLoggedIn.screenName%></a>
+	                </h1>
+	                <a href="javascript:;" class="gettingStartedButton headerSearchButton right <%if(bUserPref){%>hide<%}%>">Getting Started</a>
+	                <p class="clear" />
+                </div>
+               	
+	            <%}%>
+	            <div class="margin-bottom20  <%if(!bUserPref){%>hide<%}%>" id="dynamicContentArea">
+		             	<%
+               				if(isLoggedIn){
+						%>
+							
+						<%}%>
+						<div class="dynamicContentText">
+               			</div>
+				</div>
+                <div class="span-14 mainContent">
+                <div id="topicsFinder" class="panel">
+                    <h1>
+                        Find Topics
+                    </h1>
+                    <div>
+                        <form action="/">
+                        <input id="topicsFinderText" type="text" value="Enter a word or phrase to find a topic for your Collaborize Classroom"
+                            class="hint left span-11" /><a id="searchButton" href="javascript:;" class="searchButton left span-2">Search</a> <p class="clear" />
+                        </form>
+                    </div>
+                </div>
+
+                <div id="myBookSelf" class="myBookSelf hide"></div>
+
+                <div id="browserbySubject" class="panel">
+                    <h1>
+                        <em>Find topics by</em> Subject
+                    </h1>
+                    <div class="contentArea browseBy">
+                        <ul class="column columns_2">
+                            <li><a href="javascript:;" class="englishReading">English & Language Arts</a></li>
+                            <li><a href="javascript:;" class="historySocialStudies">History & Social Studies</a></li>
+                            <li><a href="javascript:;" class="mathIcon">Math</a></li>
+                            <li><a href="javascript:;" class="scienceTechnology">Science & Technology</a></li>
+                            <li><a href="javascript:;" class="languages">Foreign Languages</a></li>
+                            
+                            
+                            
+                        </ul>
+                        <ul class="column last columns_2">
+                        	<li><a href="javascript:;" class="health">Health & Life Skills</a></li>
+                            <li><a href="javascript:;" class="businessEconomics">Business & Economics</a></li>
+                            <li><a href="javascript:;" class="philosophyReligion">Philosophy & Religion</a></li>
+                            <li><a href="javascript:;" class="visualPerformingArts">Visual & Performing Arts</a></li>
+                            <li><a href="javascript:;" class="crossCurricular">Cross Curricular</a></li>
+                        </ul>
+                        <p class="clear" />
+                    </div>
+                </div>
+                <div id="browsebyGradeLevel" class="panel">
+                    <h1>
+                        <em>Find topics by</em> Grade Level
+                    </h1>
+                    <div class="contentArea browseBy">
+                        <ul class="column columns_3">
+                            <li><a href="javascript:;">Higher Education</a></li>
+                            <li><a href="javascript:;">Grades 11-12</a></li>
+                            <li><a href="javascript:;">Grades 9-10</a></li>
+                        </ul>
+                        <ul class="column columns_3">
+                            <li><a href="javascript:;">Grades 7-8</a></li>
+                            <li><a href="javascript:;">Grades 5-6</a></li>
+                            <li><a href="javascript:;">Grades 3-4</a></li>
+                        </ul>
+                        <ul class="column last columns_4">
+                            <li><a href="javascript:;">Grades 1-2</a></li>
+                            <li><a href="javascript:;">Preschool/Kindergarten</a></li>
+                            <li><a href="javascript:;">Professional Development</a></li>
+                        </ul>
+                        <p class="clear" />
+                    </div>
+                </div>
+                <div id="browseByUserTags" class="panel">
+                    <h1>
+                        <em>Find topics by</em> User Tags
+                    </h1>
+                    <div>
+                        <div id="userTagsContainer" class="contentArea loadingIcon">
+                            loading...
+                        </div>
+                        <p class="clear" />
+                    </div>
+                </div>
+                <div id="browseByTopicType" class="panel">
+                    <h1>
+                        <em>Find topics by</em> Topic Type
+                    </h1>
+                    <div class="contentArea browseBy">
+                        <ul class="column columns_2">
+                            <li><a href="#" class="yesorno">Yes or No</a></li>
+                            <li><a href="#" class="multiplechoice">Multiple Choice</a></li>
+                        </ul>
+                        <ul class="column last columns_2">
+                            <li><a href="#" class="voteorsuggest">Vote or Suggest</a></li>
+                            <li><a href="#" class="forum">Forum</a></li>
+                        </ul>
+                        <p class="clear" />
+                    </div>
+                </div>
+                <!--<div id="browseByTopicType" class="panel smallPanel left">
+                    <h1>
+                        <em>Find topics by</em> Topic Type
+                    </h1>
+                    <div class="contentArea browseBy">
+                        <ul class="column columns_1">
+                            <li><a href="javascript:;" class="yesorno">Yes or No</a></li>
+                            <li><a href="javascript:;" class="multiplechoice">Multiple Choice</a></li>
+                        	<li><a href="javascript:;" class="voteorsuggest">Vote or Suggest</a></li>
+                            <li><a href="javascript:;" class="forum">Forum</a></li>
+                        </ul>
+                        <p class="clear" />
+                    </div>
+                </div>
+                <div id="browseByMedia" class="panel last smallPanel left ">
+                    <h1>
+                        <em>Find topics with</em> Media
+                    </h1>
+                    <div class="contentArea browseBy">
+                        <ul class="column columns_1">
+                            <li><a href="javascript:;" class="image">Image</a></li>
+                            <li><a href="javascript:;" class="video">Video</a></li>
+                            <li><a href="javascript:;" class="pdf">PDF</a></li>
+                            <li><a href="javascript:;" class="microsoftOffice">Microsoft Office</a></li>
+                        </ul>
+                        <p class="clear" />
+                    </div>
+                </div>-->
+                <p class="clear" />
+            </div>
+                <!-- Main Content Area End -->
+                <!-- Right Side Content Area Start -->
+                <div id="rightContent" class="span-6 rightContent last">
+                <div class="notFollowing">
+                    <!--  Top Rated -->
+                    <div id="topRatedTopics" class="topicsNewsPanel">
+                        <h3>
+                            Top Rated <a href="#!/topic/rated" class="ViewMoreDownloadTopics">View more &raquo;</a></h3>
+                        <ul class="topicListHolder">
+                            <li class="loadingIcon">Loading...</li>
+                        </ul>
+                    </div>
+                    <!--  Most Downloaded -->
+                    <div id="mostDownloadedTopics" class="topicsNewsPanel">
+                        <h3>
+                            Most Downloaded <a href="#!/topic/downloaded" class="ViewMoreDownloadTopics">View more &raquo;</a></h3>
+                        <ul class="topicListHolder">
+                            <li class="loadingIcon">Loading...</li>
+                        </ul>
+                    </div>
+                    <!-- Recently Shared -->
+                    <div id="recentlySharedTopics" class="topicsNewsPanel">
+                        <h3>
+                            Recently Shared <a href="#!/topic/shared" class="ViewMoreSharedTopics">View more &raquo; </a></h3>
+                        <ul class="topicListHolder">
+                            <li class="loadingIcon">Loading...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+	</div>

@@ -1,0 +1,99 @@
+<% 
+	var cTopics = topicsList.topics.length;
+	var topicsObj = null;
+	var tagsObj = null;
+%>
+<div class="span-20 topicLayoutContaniner" id="topicListingPage">
+
+<%for(var i = 0; i < cTopics; i++){%>
+	<% 
+		topicsObj =  topicsList.topics[i].topic;
+		var tagsCount = topicsList.topics[i].topic.tags.length;
+		var isAuthor = (topicsObj.shared_by.name == additionalInfo.loggedInUser);
+	%>
+    <div class="topicLayout">
+		<div class="margin-bottom10">
+			<div class="left">
+				<a href="#!/topic/<%= topicsObj.ccl_topic_id%>/<%= ccl.utils.encodePredefinedChars(topicsObj.topic_title)%>" class="<%=topicsObj.Topic_type_id %> left textIndent topicType" id="<%= topicsObj.ccl_topic_id%>" name="<%= ccl.utils.encodePredefinedChars(topicsObj.topic_title)%>"><%=topicsObj.Topic_type_id %></a>
+			</div>
+			<div class="span-15">
+				<a href="#!/topic/<%= topicsObj.ccl_topic_id%>/<%= ccl.utils.encodePredefinedChars(topicsObj.topic_title)%>" class="topicTitle strong"><%= ccl.utils.escapeSpecialCharacters(topicsObj.topic_title)%></a><br/>
+				<span><%if(topicsObj.shared_type == "shared"){%>Shared<%}else{%>Archived<%}%> by </span>
+				<a href="#!/profile/<%= ccl.utils.encodePredefinedChars(topicsObj.shared_by.name)%>" class="linkToProfile">
+					<%= topicsObj.shared_by.name%>
+				</a>
+				<span> on <%= topicsObj.topic_created_date%></span>
+				<%if(topicsObj.num_downloads!= null){%> 
+					<span> |</span>
+					<a href="#!/topic/userslist/<%= topicsObj.ccl_topic_id%>/<%= ccl.utils.encodePredefinedChars(topicsObj.topic_title)%>"> <%= topicsObj.num_downloads%> <%if(topicsObj.num_downloads == 1){%>Download<%}else{%>Downloads<%}%></a>
+				<%}%>
+				<%if(topicsObj.inspired_by.topic_ccl_id != null){%> 
+					<span> |</span>
+					<span> Inspired by </span> 
+					<a href="#!/topic/<%= topicsObj.inspired_by.topic_ccl_id%>/<%= ccl.utils.encodePredefinedChars(topicsObj.topic_title)%>" id="<%= topicsObj.inspired_by.topic_ccl_id%>"> this topic</a>
+				<%}%>
+				<%if(topicsObj.avg_rating){%>
+				<div>
+					<span class="left"> Avg User Rating </span>
+					<div id="smallAppleRating" class="starRating left ratingInViewList">
+						<input name="avg<%=i%>" type="radio" class="star" value="1" <%=(topicsObj.avg_rating == 1 ? "checked" : "")%>  disabled="disabled"/>
+						<input name="avg<%=i%>" type="radio" class="star" value="2" <%=(topicsObj.avg_rating == 2 ? "checked" : "")%> disabled="disabled"/>
+						<input name="avg<%=i%>" type="radio" class="star" value="3" <%=(topicsObj.avg_rating == 3 ? "checked" : "")%> disabled="disabled"/>
+						<input name="avg<%=i%>" type="radio" class="star" value="4" <%=(topicsObj.avg_rating == 4 ? "checked" : "")%> disabled="disabled"/>
+						<input name="avg<%=i%>" type="radio" class="star" value="5" <%=(topicsObj.avg_rating == 5 ? "checked" : "")%> disabled="disabled"/>
+					</div>
+					<span class="starRatingCount left">(<%= topicsObj.num_ratings%>)</span>
+				</div>
+				<%}%>
+			</div>
+			<%if(topicsObj.shared_by.name == additionalInfo.loggedInUser){%>
+				<div class="<%=topicsObj.shared_type%> right"><%=topicsObj.shared_type%></div>
+			<%}%>
+			<p class="clear"/>
+		</div>
+		<div>
+			<%if(tagsCount!= 0){%>
+			<div class="span-1">
+				Tags:
+			</div>
+			<div class="span-13 tagsList">
+				<%for(var j = 0; j < tagsCount; j++){%>
+				<% 
+					tagsObj =  topicsList.topics[i].topic.tags[j];
+				%>
+				<a href="#!/topic/tag/<%= tagsObj.tag.name%>" id="<%= tagsObj.tag.id%>"><%=tagsObj.tag.name%></a><%if(j < tagsCount-1){%>,<%}%><%}%>
+			</div>
+			<%}else if(tagsCount==0){%>
+			<div class="span-1">
+				Tags:
+			</div>
+			<div class="span-13 tagsList">
+				None
+			</div>
+			<%}%>
+			<div class="span-4 right last">
+				
+				<%if(additionalInfo.loggedInUser && isAuthor && sitesObj.length > 0){%>
+					<a href="javascript:void(0);" class="loggedInCopyButton" id="<%= topicsObj.ccl_topic_id%>" name="<%=topicsObj.Topic_type_id %>">Copy to My Site</a>
+					<a href="javascript:void(0);" class="dropDownButton" tabindex="-1" id="<%= topicsObj.ccl_topic_id%>" name="<%=topicsObj.Topic_type_id %>">&nbsp;</a>
+					<div class="copySiteDropDownContainer" style="position: relative;">
+					<ul class="copySiteDropDown" id="dropDown<%= topicsObj.ccl_topic_id%>" style="position: absolute;">
+						<li class="topicAction" id="<%= topicsObj.ccl_topic_id%>" name="<%=topicsObj.Topic_type_id %>">Delete Topic</li>
+						<%if(topicsObj.shared_type != "shared"){%>
+							<li class="topicAction" id="<%= topicsObj.ccl_topic_id%>" name="<%=topicsObj.Topic_type_id %>">Share Topic</li>
+						<%}%>
+					</ul>
+					</div>
+				<%}else if(additionalInfo.loggedInUser && sitesObj.length > 0){%>
+					<a href="javascript:void(0);" class="copyButton" id="<%= topicsObj.ccl_topic_id%>" name="<%=topicsObj.Topic_type_id %>">Copy to My Site</a>
+				<%}else if(additionalInfo.loggedInUser && sitesObj.length == 0){%>
+					<a href="javascript:void(0);" class="copyButton" id="<%= topicsObj.ccl_topic_id%>" name="<%=topicsObj.Topic_type_id %>">Get this Topic</a>
+				<%}else{%>
+					<a href="javascript:void(0);" class="copyButton" id="<%= topicsObj.ccl_topic_id%>" name="<%=topicsObj.Topic_type_id %>">Get this Topic</a>
+				<%}%>
+			</div>
+			<p class="clear"/>
+		</div>
+	</div>
+<%}%>
+</div>

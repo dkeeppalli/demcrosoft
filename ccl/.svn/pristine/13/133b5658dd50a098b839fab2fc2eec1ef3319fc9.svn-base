@@ -1,0 +1,404 @@
+.popup
+{
+    margin:0px auto;
+    width:530px;
+    text-align:left;
+}
+.popup .top
+{
+	 clear:both;
+}
+.popup .top .left
+{
+	 float:left;
+	 width:25px;
+	 height:25px;
+	 font-size:0px;
+	 background:url(../img/new_modal_topleft.gif) no-repeat;
+}
+.popup .top .middle
+{
+     float:left;
+	 height:25px;
+	 font-size:0px;
+	 background:url(../img/new_modal_topmiddle.gif) repeat-x;
+	 width:480px;
+}
+.popup .top .right
+{
+     float:left;
+	 width:25px;
+	 height:25px;
+	 font-size:0px;
+	 background:url(../img/new_modal_topright.gif) no-repeat;
+}
+.popup .middlebg
+{
+	 background:url(../img/ul_modal_middle.gif) repeat-y;
+	 width:475px;
+	 float:left;
+	 padding:0px 25px 10px 30px;
+}
+.popup .bottom
+{
+	clear:both;
+}
+
+.popup .bottom .left
+{
+     float:left;
+	 width:25px;
+	 height:25px;
+	 font-size:0px;
+	 background:url(../img/new_modal_bottomleft.gif) no-repeat;
+}
+.popup .bottom .middle
+{
+     float:left;
+	 height:25px;
+	 font-size:0px;
+	 background:url(../img/new_modal_bottommiddle.gif) repeat-x;
+	 width:480px;
+}
+.popup .bottom .right
+{
+     float:left;
+	 width:25px;
+	 height:25px;
+	 font-size:0px;
+	 background:url(../img/new_modal_bottomright.gif) no-repeat;
+}
+.popup .close
+{
+	float:right;
+}
+.popup .close img
+{
+	border:0px;
+	cursor:pointer;
+}
+
+.modal-header
+{
+	padding-bottom:10px;
+}
+
+.modal-title
+{
+	font-size:21px;
+	float:left;
+	font-weight:bold;
+}
+.title
+{
+	font-size:15px;
+}
+.subtitle
+{
+    margin-bottom:5px !important;
+}
+
+
+.delete-site-buttons
+{
+	float:right;
+	margin-right:5px;
+}
+.modal-header-for-site
+{
+    padding-bottom:10px;
+}
+.label
+{
+	font-size:1em;
+	width:97px;
+	float:left;
+	text-align:right;
+	padding:8px 13px 0px 0px;
+}
+.register-label
+{
+	font-size:13px;
+	font-weight:bold;
+	padding:12px 13px 0px 0px;
+	margin-bottom:0px !important;
+}
+.register-label span
+{
+    color:#333333;
+    font-weight:normal !important;
+}
+.note
+{
+    font-size:0.9em;
+    color:#999999;
+	display: inline-block;
+	width: 450px;
+	line-height:normal;
+	
+}
+.field
+{
+	float:left;
+}
+.field input
+{
+	border:1px solid #bfbfbf;
+	width:315px;
+	height:21px;
+	padding-left: 5px;
+	font-size: 1em;
+	font-family: Verdana, Geneva, sans-serif;
+}
+.screen-field
+{
+	border:1px solid #bfbfbf !important;
+	width:440px;
+	height:21px;
+	margin-right:10px;
+	margin-top:5px !important;
+	font-size: 1em;
+	padding-left: 5px;
+}
+.register-field
+{
+	border:1px solid #bfbfbf !important;
+	width:570px;
+	height:21px;
+	margin-right:10px;
+	font-size:13px;
+	margin-top:5px !important;
+	margin-bottom:15px;
+	font-size: 1em;
+	padding-left: 5px;
+}
+.popup .orange-button
+{
+	border:0px;
+	background:url(../img/yellow_button_bg.gif) repeat-x;
+	text-align:center;
+	color:#fff;
+	padding:5px 0px;
+	font-weight:bold;
+	cursor:pointer;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-khtml-border-radius:10px;
+	border-radius:10px;
+	margin-top:10px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1em;
+	margin-bottom: 0;
+}
+.orange-button-registration
+{
+	border:0px;
+	background:url(../img/yellow_button_bg.gif) repeat-x;
+	text-align:center;
+	color:#fff;
+	padding:5px 0px;
+	font-weight:bold;
+	cursor:pointer;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-khtml-border-radius:5px;
+	border-radius:5px;
+	margin-top:5px;
+}
+.popup .copyTopic
+{
+    padding:5px 10px 5px 10px;
+    margin:10px 0px 0px 10px;
+}
+.popup .small-button
+{
+	width:80px;
+}
+.popup .marginLeft60
+{
+	margin-left:60px;
+}
+.popup .marginLeft92
+{
+	margin-left:92px;
+}
+
+.popup #fgPwdModal .modal-title{
+	padding-bottom: 10px;
+}
+
+.popup .signin-content
+{
+	padding-left:15px;
+	padding-top: 15px;
+}
+.popup .buttons
+{
+	margin-left:109px;
+}
+.popup .footerMessage
+{
+    margin-top: 20px; 
+    border-top: 1px dotted #ccc; 
+    padding-top: 10px;
+}
+.popup .footer
+{
+    padding-top: 10px;
+}
+.popup .submitbutton
+{
+    width:70px;
+    margin-left:152px;
+    margin-top:10px;
+}
+.copy-register
+{
+    width:620px !important;
+}
+.copy-register .top .middle
+{
+    width:570px !important;
+}
+.copy-register .bottom .middle
+{
+    width:570px !important;
+}
+.copy-register .middlebg
+{
+    width:565px !important;
+    background:url(../img/ul_modal_middle_big_620.gif) repeat-y !important;
+}
+.copy-register .signin-content
+{
+	width:435px;
+}
+.register
+{
+    width:670px !important;
+}
+.register .title
+{
+    font-size:19px !important;
+    margin-bottom: 10px !important;
+	line-height: 0.4em;
+	padding-bottom: 10px;
+}
+.register .top .middle
+{
+    width:620px !important;
+}
+.register .bottom .middle
+{
+    width:620px !important;
+}
+.register .middlebg
+{
+    width:615px !important;
+    background:url(../img/ul_modal_middle_big_670.gif) repeat-y !important;
+}
+#registrationPage .modal-header{
+	padding-bottom: 0;
+}
+#registrationPage .title{
+	font-size: 19px;
+	margin-bottom: 10px;
+}
+#registrationPage .orange-button{
+	margin-top: 15px;
+}
+.copytopic-text
+{
+    margin-bottom:10px !important;
+    font-size:15px;
+    margin-left:10px;
+	margin-top: 5px;
+	line-height: normal;
+	margin-right: 10px;
+}
+.popupBlockerText
+{
+    margin-bottom:15px !important;
+    font-size:14px;
+    margin-left:10px;
+	margin-top: 5px;
+	line-height: normal;
+	margin-right: 10px;
+}
+.select-sites
+{
+    width:250px;
+    margin-left:10px;
+}
+.footer-subtitle
+{
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:0px !important;
+}
+.create-button
+{
+    float:right;
+    text-align:right;
+}
+.rigister-text
+{
+    border-bottom:1px dotted #CCCCCC;
+    border-top:1px dotted #CCCCCC;
+    padding-bottom:10px !important;
+    padding-top:10px !important;
+}
+.profilebutton
+{
+    width:160px;
+    margin-bottom:20px;
+}
+.alert-div
+{
+    border:1px solid #ffd479;  
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-khtml-border-radius:10px;
+	border-radius:10px;
+	background:#fffdba;
+	padding:12px;
+	width:410px;
+	margin-top: 5px;
+}
+.alert-div h3
+{
+    font-weight:bold;
+    font-size:15px;
+    padding-left:30px;
+    background:url(../img/alert_icon.png) no-repeat;
+    height:22px;
+    margin-bottom:0px;
+    padding-top:2px;
+}
+.buttonsDiv
+{
+	width:535px;	
+}
+.buttonsDiv p
+{
+    margin-top:12px;
+    font-size:15px;
+    margin-bottom:0px !important;
+    margin-left:10px;
+}
+.popupBlockerCancel
+{
+	font-size:14px;
+    margin:0px 0px 0px 10px !important;
+}
+#copyToSiteRegistration .title{
+	margin-bottom: 10px;
+	font-size: 1.3em;
+}
+#copyToSiteRegistration .subtitle{
+	font-weight: bold;
+	font-size: 1.3em;
+}
+#copyToSiteRegistration .footer-subtitle{
+	font-size: 1.3em;
+}

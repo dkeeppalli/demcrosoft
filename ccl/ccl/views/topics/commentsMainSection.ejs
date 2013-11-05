@@ -1,0 +1,27 @@
+
+	<% if(GLOBALS[10] == ""){ %>
+		
+	<% }else { %>
+		<div class="comments_header">
+			<% if(commentsDetails.comments_count == 0){ %>
+				<p class="gray_color" id="comment_be_first">None yet...be the first!</p>
+			<% } %>
+			<div class="comments_post">
+				<img src="<%= userObj.gravatorUrl%>+'?'+<%=new Date().getTime()%>"  width="41px" height="40px" />
+				<textarea id="myCommentTextarea" class="hint">Enter your comment here</textarea>
+				<p class="clear" />
+			</div>
+			<div>
+				<a class="saveChanges right" href="javascript:;" id="commentSubmitButton">Post</a>
+				<span class="loadingIcon" id="postingCommnetLoader">posting comment... </span>
+				<p class="clear" />
+			</div>
+		</div>
+	<% } %>
+
+
+<div id="commentsListContainer">
+	<%= $.View('/ccl/views/topics/commentsList', {commentsDetails: commentsDetails.comments, 
+						      sortOptionsObj: sortOptionsObj, 
+						      sortOptionsSelectKey: sortOptionsSelectKey})%>
+</div>

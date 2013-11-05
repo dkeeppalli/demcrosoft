@@ -1,0 +1,49 @@
+﻿{
+    "response": {
+        "stat": "ok",
+	"result" : {
+		"commentsList": [
+		    {
+			"comment_author": {
+				"screen_name"		: "asasa",
+				"first_last_name"	: "Pavan Kumar",
+				"profile_pic_url"	: "http://www.gravatar.com/avatar/9b2adc906bfe958077449df85d3c0fe2?s=40&default=https://cclibrary.s3.amazonaws.com/user_library.jpg"
+			},
+			"comment_id": "1",
+			"commented_time": "August 26, 2011",
+			"comment_text": "Etiam mauris metus, tincidunt porttitor tincidunt sed, fringilla a mauris. In non lacus nulla, sed elementum ligula. Fusce eget lacus nulla. Ut at est est, eu tempus neque. Aliquam porta pharetra nunc, at pharetra massa ultricies eu."
+		    },
+		    {
+			"comment_author": {
+				"screen_name"		: "KALYAN CHAKRAVARTHY M",
+				"first_last_name"	: "Surya Pavan",
+				"profile_pic_url"	: "http://www.gravatar.com/avatar/9b2adc906bfe958077449df85d3c0fe2?s=40&default=https://cclibrary.s3.amazonaws.com/user_library.jpg"
+			},
+			"comment_id": "2",
+			"commented_time": "August 27, 2011",
+			"comment_text": "this is comment 2 ; this is comment 2"
+		    },
+		    {
+			"comment_author": {
+				"screen_name"		: "CCL1",
+				"first_last_name"	: "Pavan",
+				"profile_pic_url"	: "http://www.gravatar.com/avatar/9b2adc906bfe958077449df85d3c0fe2?s=40&default=https://cclibrary.s3.amazonaws.com/user_library.jpg"
+			},
+			"comment_id": "3",
+			"commented_time": "August 28, 2011",
+			"comment_text": "this is comment 3 this is comment 3 this is comment 3"
+		    },
+		    {
+			"comment_author": {
+				"screen_name"		: "KALYAN CHAKRAVARTHY M",
+				"first_last_name"	: "MSS Pavan Kumar",
+				"profile_pic_url"	: "http://www.gravatar.com/avatar/9b2adc906bfe958077449df85d3c0fe2?s=40&default=https://cclibrary.s3.amazonaws.com/user_library.jpg"
+			},
+			"comment_id": "4",
+			"commented_time": "August 29, 2011",
+			"comment_text": "this is comment 4  this is comment 4 this is comment 4 this is comment 4 this is comment 4 this is comment 4 this is comment 4 this is comment 4 this is comment 4 this is comment 4 this is comment 4"
+		    }
+		]
+	}
+    }
+}

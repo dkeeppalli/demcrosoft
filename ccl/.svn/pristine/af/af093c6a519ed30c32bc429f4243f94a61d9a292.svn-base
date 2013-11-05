@@ -1,0 +1,35 @@
+<% 
+	var cTopics = topicsList.topics.length;
+	var oTopics = null;
+	var sViewMode = viewMode;
+%>
+<%
+	for(var i = 0; i < cTopics; i++){
+		oTopics =  topicsList.topics[i].topic;
+%>
+		<li>
+			<a href="#!/topic/<%= oTopics.ccl_topic_id%>/<%= ccl.utils.encodePredefinedChars(oTopics.topic_title)%>" class="topicTitle" id="<%= oTopics.ccl_topic_id%>"><%= ccl.utils.escapeSpecialCharacters(oTopics.topic_title)%></a>
+			 shared by 
+			<a href="#!/profile/<%=ccl.utils.encodePredefinedChars(oTopics.shared_by.name)%>" class="linkToProfile"><%= oTopics.shared_by.name%></a>
+			<div class="footer">
+				<div class="left"><%= oTopics.topic_created_date%></div>
+					<%if((oTopics.num_downloads!= null) && (sViewMode == 'topDownloaded')){%> 
+						<span> |</span>
+						<a href="#!/topic/userslist/<%= oTopics.ccl_topic_id%>/<%= ccl.utils.encodePredefinedChars(oTopics.topic_title)%>"> <%= oTopics.num_downloads%> <%if(oTopics.num_downloads == 1){%>Download<%}else{%>Downloads<%}%></a>
+					<%}%>
+					<%if(sViewMode == 'topRated'){%>
+						<div id="smallAppleRating" class="starRating">
+							<input name="<%=i%>" type="radio" class="star" value="1" <%=(oTopics.avg_rating == 1 ? "checked" : "")%>  disabled="disabled"/>
+							<input name="<%=i%>" type="radio" class="star" value="2" <%=(oTopics.avg_rating == 2 ? "checked" : "")%> disabled="disabled"/>
+							<input name="<%=i%>" type="radio" class="star" value="3" <%=(oTopics.avg_rating == 3 ? "checked" : "")%> disabled="disabled"/>
+							<input name="<%=i%>" type="radio" class="star" value="4" <%=(oTopics.avg_rating == 4 ? "checked" : "")%> disabled="disabled"/>
+							<input name="<%=i%>" type="radio" class="star" value="5" <%=(oTopics.avg_rating == 5 ? "checked" : "")%> disabled="disabled"/>
+						</div>
+						<span class="starRatingCount">(<%= oTopics.num_ratings%>)</span>
+					<%}%>
+					<p class="clear"/>
+			</div>
+		</li>
+<%
+	}
+%>

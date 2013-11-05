@@ -1,0 +1,172 @@
+<%
+		var userOptions = userData;
+		var sError = errorMessage;
+%>
+<!-- Edit Profile Info Area Start -->
+<div id="profileInfo">
+		<h1>Edit Your Profile</h1>
+		<div class="left span-13">
+			<div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+		</div>
+		<p class="clear"/>
+</div>
+<div class="span-20 topicLayoutContaniner">
+	<div>
+		<div class="left">
+			<span class="required">*</span><span>Required</span>
+		</div>
+		<% if(sError){%>
+		<div class="left errorMessage span-13">
+			<div><%= sError%></div>			
+		</div>
+		<%}%>		
+		<div class="right">
+			<a href="javascript:void(0);" class="cancelBtn white-button span-2">Cancel</a>
+			<a href="javascript:void(0);" class="saveBtn orange-button span-3 last" >Save Changes</a>
+		</div>
+		<p class="clear"/>
+	</div>
+	<div class="editProfileContainer"><!-- edit your library profile div start -->
+		<form name="editLibraryProfile" action="/" onsubmit="return false" id="editProfileScreenNameFormClass">
+		<fieldset>
+		<legend>Your Library Profile</legend>
+		<div class="count margin-bottom10">This information is displayed on your profile page in the Collaborize Classroom Library.</div>
+		<div class="editProfilePanal">
+			<div class="editProfileLabel left span-5"><span class="required">*</span><span>Screen Name:</span></div>
+			<div class="editInputField left">
+				<input type="text" id="screenName" maxlength="50" value="<%= ccl.utils.urlDecode(userOptions.screen_name)%>" class="validate[required,funcCall[inputRequired,emptyScreenName],custom[screenName]] text-input span-6" />
+			</div>
+			<div class="editInputField left">
+				<div class="screenAvailability"><a href="javascript:void(0);" id="screenNameAvailable">Check Availability</a></div>
+				<div class="loadingIcon checkAvailability" style="display:none;">Checking..</div>
+			</div>
+			<p class="clear"/>
+		</div>
+		<div id="checkErrorDiv" class="editProfilePanal" style="display:none;">
+			<div class="editProfileLabel left span-5">&nbsp;</div>
+			<div id="checkError"></div>
+			<p class="clear"/>
+		</div>
+		<div class="editProfilePanal">
+			<div class="editProfileLabel left span-5"><span>School Name:</span></div>
+			<div class="editInputField left">
+				<input type="text" id="schoolName" maxlength="100" value="<%= ccl.utils.unescapePreDefinedCharactersWithHTML(userOptions.school)%>" class="validate[optional,custom[schoolName]] span-6" />
+			</div>
+			<p class="clear"/>
+		</div>
+		<div class="editProfilePanal">
+			<div class="editProfileLabel left span-5"><span>Your Role:</span></div>
+			<div class="editInputField left">
+				<%if(userOptions.role == ""){%>
+					<input type="text" id="role" maxlength="100" value="ex. 10th Grade English Teacher" class="validate[optional,custom[role]] span-6 hint"   />
+				<%}else{%>	
+					<input type="text" id="role" maxlength="100" class="validate[optional,custom[role]] span-6"  value="<%= ccl.utils.unescapePreDefinedCharactersWithHTML(userOptions.role)%>" />
+				<%}%>
+			</div>
+			<p class="clear"/>
+		</div>
+		<div class="editProfilePanal">
+			<div class="editProfileLabel left span-5"><span>Your Location:</span></div>
+			<div class="editInputField left">
+				<% if(userOptions.location == ""){%>
+					<input type="text" id="location" maxlength="100" value="ex. Santa Rosa, CA" class="validate[optional,custom[location]] span-6 hint"  />
+				<%}else{%>
+				<input type="text" id="location" maxlength="100" value="<%= ccl.utils.unescapePreDefinedCharactersWithHTML(userOptions.location)%>" class="validate[optional,custom[location]] span-6" />
+				<%}%>
+			</div>
+			<p class="clear"/>
+		</div>
+		<div class="editProfilePanal">
+			<div class="editProfileLabel left span-5"><span>Your Website/Blog:</span></div>
+			<div class="editInputField left">
+				<div class="left">http://</div><input type="text" maxlength="100" id="websiteUrl" value="<%= ccl.utils.unescapePreDefinedCharactersWithHTML(userOptions.website_blog)%>" class="span-5" />
+			</div>
+			<p class="clear"/>
+		</div>
+		<div class="editProfilePanal">
+			<div class="editProfileLabel left span-5"><span>Profile Picture:</span></div>
+			<div class="editInputField left">
+				<img src="<%= userOptions.large_image_url%>+'?'+<%=new Date().getTime()%>" alt="profile image" width="41" height="40" />
+			</div>
+			<div class="editInputField left">
+				<div class="span-11 gravitorText">We use a service called Gravatar for our profile pictures.  If you have a Gravatar account for <%= userOptions.user_id%>, you should see your image here (you can change it by logging in at <a href="http://gravatar.com/" target="_blank">gravatar.com</a>).  If not, <a href="http://en.gravatar.com/site/signup/<%= userOptions.user_id%>" target="_blank">create a Gravatar account</a> and upload your picture — it's quick and easy!</div>
+			</div>
+			<p class="clear"/>
+		</div>
+				
+		</fieldset>
+		</form>
+	</div><!-- edit your library profile div ends -->
+	
+	<div class="editProfileContainer"><!-- edit your cc id div start -->
+		<form name="editCCId" action="/" onsubmit="return false" id="editProfileFormClass">
+		<fieldset>
+		<legend>Your Collaborize Classroom ID</legend>
+		<div class="count margin-bottom10">This information is used by the Library and is also shared across all of your Collaborize Classroom sites.  Changes you make here will update your profile (and login information) for the Library and all of those sites.</div>
+		<div class="editProfilePanal">
+			<div class="editProfileLabel left span-5"><span class="required">*</span><span>Name:</span></div>
+			<div class="editInputField left">
+				<input type="text" id="profileFirstName" maxlength="50" value="<%= ccl.utils.unescapePreDefinedCharactersWithHTML(userOptions.first_name)%>" class="validate[required,funcCall[inputRequired,emptyFirstName],custom[firstName]] text-input span-3" />
+			</div>
+			<div class="editInputField left">
+				<input type="text" id="profileLastName" maxlength="50" value="<%= ccl.utils.unescapePreDefinedCharactersWithHTML(userOptions.last_name)%>" class="validate[required,funcCall[inputRequired,emptyLastName],custom[lastName]] text-input span-3"/>
+			</div>
+			<p class="clear"/>
+		</div>
+		<div class="editProfilePanal">
+			<div class="editProfileLabel left span-5"><span class="required">*</span><span>Email:</span></div>
+			<div class="editInputField left">
+				<input type="text" id="profileEmail" maxlength="255" value="<%= userOptions.user_id%>" class="validate[required,funcCall[inputRequired,emptyProfileEmail],custom[profileEmail]] text-input span-6" />
+			</div>
+			<p class="clear"/>
+		</div>
+		<div id="changePasswordLink">
+			<div class="editProfileLabel left span-5">&nbsp;</div>
+			<div class="editInputField left">
+				<a href="javascript:void(0);" class="changePassword">Change password</a>
+			</div>
+			<p class="clear"/>
+		</div>
+		<div id="changePasswordFields" style="display:none;"><!-- change password fields div start -->
+			<div class="changePasswordFields">	
+				<div class="editProfilePanal">
+					<div class="editProfileLabel left span-5"><span class="required">*</span><span>Old Password:</span></div>
+					<div class="editInputField left">
+						<input type="password" id="oldPassword" maxlength="128"  value="" class="validate[required,funcCall[inputRequired,emptyProfilePassword],minSize[6]] text-input span-6" />
+					</div>
+					<p class="clear"/>
+				</div>
+				<div class="editProfilePanal">
+					<div class="editProfileLabel left span-5"><span class="required">*</span><span>New Password:</span></div>
+					<div class="editInputField left">
+						<input type="password" id="newPassword" maxlength="128" value="" class="validate[required,funcCall[inputRequired,emptyNewPassword],minSize[6]] text-input span-6" name="newPassword" />
+					</div>
+					<p class="clear"/>
+				</div>
+				<div class="editProfilePanal">
+					<div class="editProfileLabel left span-5"><span class="required">*</span><span>Confirm New Password:</span></div>
+					<div class="editInputField left">
+						<input type="password" id="confirmNewPassword" maxlength="128"  value="" class="validate[required,funcCall[inputRequired,emptyConfirmNewPassword],minSize[6],equals[newPassword]] text-input span-6" name="confirmNewPassword"  />
+					</div>
+					<p class="clear"/>
+				</div>
+			</div>
+			<div class="editProfilePanal">
+				<div class="editProfileLabel left span-5">&nbsp;</div>
+				<div class="editInputField left">
+					<a href="javascript:void(0);" class="changePassword">Don't Change password</a>
+				</div>
+				<p class="clear"/>
+			</div>
+		</div><!-- change password fields div ends -->
+		</fieldset>
+		</form>
+	</div><!-- edit your cc id div ends -->
+	
+	<div class="right">
+		<a href="javascript:void(0);" class="cancelBtn white-button span-2">Cancel</a>
+		<a href="javascript:void(0);" class="saveBtn orange-button span-3 last">Save Changes</a>
+	</div>
+	<p class="clear"/>
+</div>
+<!--Edit Profile Info Area End -->

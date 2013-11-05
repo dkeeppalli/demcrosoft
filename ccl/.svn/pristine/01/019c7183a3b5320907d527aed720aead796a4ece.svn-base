@@ -1,0 +1,7 @@
+<% 
+	var enablePrevious = previousNextTopicOptionsObj.previous;
+	var enableNext = previousNextTopicOptionsObj.next;
+%>	
+	
+	<%if(enablePrevious){%><a href="#!/topic/<%= enablePrevious.ccl_topic_id%>/<%= ccl.utils.encodePredefinedChars(ccl.utils.encodeAndCharacter(enablePrevious.topic_title))%>" id="previousLink" class="previousNextLinks"><%}%>&#171; <%= ccl.bundle.label.previous%><%if(enablePrevious){%></a><%}%> | <%if(enableNext){%><a href="#!/topic/<%= enableNext.ccl_topic_id%>/<%= ccl.utils.encodePredefinedChars(ccl.utils.encodeAndCharacter(enableNext.topic_title))%>" id="nextLink" class="previousNextLinks"><%}%><%= ccl.bundle.label.next%> &#187;<%if(enableNext){%></a><%}%>
+		

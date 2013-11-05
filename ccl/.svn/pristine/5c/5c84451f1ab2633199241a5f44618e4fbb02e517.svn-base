@@ -1,0 +1,95 @@
+<div class="panel">
+	<h1 class="tabs">
+	    My Bookshelf 
+	   
+	        <a href="javascript:;" id="myTopics" class="active">My Topics</a>
+	        <a href="javascript:;" id="myFavorites">My Favorites</a>
+	    
+	</h1>
+	<div class="contentArea">
+	    <div id="myTopicsContentArea">
+	    	<div>
+	    		<h6 class="left">Most Recent</h6>
+	    		<span>&nbsp; |&nbsp;</span>
+	    		<a href="javascript:;">View All »</a>
+	    		<span class="count">(14 Shared, 6 Private) </span>
+	    	</div>
+	    	<div class="myBookselfTopicList">
+	    		<ul>
+	    			<li class="first">
+	    				<div class="archive left">archive</div>
+	    				<a href="javascript:;">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</a>
+	    				<p class="clear" />
+	    			</li>
+	    			<li>
+	    				<div class="shared left">shared</div>
+	    				<a href="javascript:;">Ut nec felis est morbi non gravida purus vestibulum elit eros?</a>
+	    				<p class="clear" />
+	    			</li>
+	    			<li>
+	    				<div class="shared left">shared</div>
+	    				<a href="javascript:;">Duis facilisis quam quis enim commodo pharetra ultrices diam placerat etiam vulputate tellus quis velit consequat volutpat?</a>
+	    				<p class="clear" />
+	    			</li>
+	    			<li>
+	    				<div class="archive left">archive</div>
+	    				<a href="javascript:;">Aliquam malesuada interdum lobortis etiam rutrum, lacus vitae pellentesque convallis, nulla velit viverra mi?</a>
+	    				<p class="clear" />
+	    			</li>
+	    			<li>
+	    				<div class="shared left">shared</div>
+	    				<a href="javascript:;">Ut nec felis est morbi non gravida purus vestibulum elit eros?</a>
+	    				<p class="clear" />
+	    			</li>
+	    		</ul>
+	    	</div>
+		</div>
+		<div id="myFavoritesContentArea" class="hide">
+	    	<div>
+	    		<h6 class="left">Most Recent</h6>
+	    		<span>&nbsp; |&nbsp;</span>
+	    		<a href="javascript:;">View All »</a>
+	    	</div>
+	    	
+	    	<div class="myBookselfTopicList">
+	    		<ul>
+	    			<li class="first">
+	    				<div class="favorite left">archive</div>
+	    				<a href="javascript:;">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</a>
+	    				<span>shared by</span>
+	    				<a href="javascript:;">spyla</a>
+	    				<p class="clear" />
+	    			</li>
+	    			<li>
+	    				<div class="favorite left">shared</div>
+	    				<a href="javascript:;">Ut nec felis est morbi non gravida purus vestibulum elit eros?</a>
+	    				<span>shared by</span>
+	    				<a href="javascript:;">spyla</a>
+	    				<p class="clear" />
+	    			</li>
+	    			<li>
+	    				<div class="favorite left">shared</div>
+	    				<a href="javascript:;">Duis facilisis quam quis enim commodo pharetra ultrices diam placerat etiam vulputate tellus quis velit consequat volutpat?</a>
+	    				<span>shared by</span>
+	    				<a href="javascript:;">spyla</a>
+	    				<p class="clear" />
+	    			</li>
+	    			<li>
+	    				<div class="favorite left">archive</div>
+	    				<a href="javascript:;">Aliquam malesuada interdum lobortis etiam rutrum, lacus vitae pellentesque convallis, nulla velit viverra mi?</a>
+	    				<span>shared by</span>
+	    				<a href="javascript:;">spyla</a>
+	    				<p class="clear" />
+	    			</li>
+	    			<li>
+	    				<div class="favorite left">shared</div>
+	    				<a href="javascript:;">Ut nec felis est morbi non gravida purus vestibulum elit eros?</a>
+	    				<span>shared by</span>
+	    				<a href="javascript:;">spyla</a>
+	    				<p class="clear" />
+	    			</li>
+	    		</ul>
+	    	</div>
+	   </div>
+	</div>
+</div>

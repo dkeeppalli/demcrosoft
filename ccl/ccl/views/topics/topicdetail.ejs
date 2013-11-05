@@ -1,0 +1,464 @@
+<% 
+	var topicObj = topicDetails;
+	var tagsObj = null;
+	var tagsCount = topicObj.tags.length;
+	var gradeObj = null;
+	var gradesCount = topicObj.grades.length;
+	var subjectObj = null;
+	var subjectsCount = topicObj.subjects.length;
+	var voteChoicesCount = topicObj.vote_choice.length;
+	var isAuthor = (topicObj.topic_author.screen_name == additionalInfo.loggedInUser);
+	var topicStatus = topicDetails.topic_status_id;
+	var isPublicTopics = additionalInfo.publicTopics;
+	var navigationObj = additionalInfo.topicOptionsObj.previousBookmark;
+	var navigationFrom = (navigationObj.from || "").split("/")[0];
+	var navigationValue = navigationObj.value;
+	var rateTopic = topicDetails.user_rating;
+	var avgRating = topicDetails.avg_rating;
+	
+	var downloadStaticText = (topicObj.num_downloads == 1 ? "Download" : "Downloads");
+	var commentStaticText = (topicObj.comments_count == 1 ? "Comment" : "Comments");
+	if(topicObj.num_downloads == null)
+		topicObj.num_downloads = 0;
+%>	
+	<div class="margin-bottom10">
+		<div class="left">
+			<a href="#!"><%= ccl.bundle.label.home%></a> &gt; 
+			<%
+				if(navigationFrom == null || navigationFrom == "" || navigationFrom == 'userslist' || navigationFrom == 'topicdetail' || navigationFrom == 'shared_type' || navigationFrom == 'screen_name'){
+			%>
+				<a href="#!/profile/<%=topicObj.topic_author.screen_name%>"><%= ccl.bundle.label.topicsFrom%> <%= topicObj.topic_author.screen_name%></a>	
+			<%
+				}else if(navigationFrom == "downloaded" || navigationFrom == "shared" || navigationFrom == "rated"){
+			%>
+				<a href="#!/topic/<%=navigationFrom%>"><%= ccl.utils.fullTitles(navigationFrom) %></a>
+			<%
+				}else if(navigationFrom == "search"){
+			%>
+				<a href="#!/<%=navigationObj.from%>/<%= ccl.utils.encodePredefinedChars(ccl.utils.encodeAndCharacter(navigationValue))%>"><%= ccl.bundle.label.searchResultsFor%> <%= navigationValue%></a>
+			<%
+				}else{
+			%>
+				<a href="#<%=navigationFrom%>"><%= ccl.bundle.label.browseTopicsBy%> <%= ccl.utils.fullTitles(navigationFrom) %></a> &gt; <a href="#!/topic/<%=navigationFrom%>/<%=ccl.utils.encodePredefinedChars(navigationValue)%>"><%= navigationValue%></a>
+			<%
+				}
+			%>
+		</div>
+		<div class="right" id="previousNextDiv">
+		</div>
+		<p class="clear"/>
+	</div>
+<%
+	if(topicStatus == "2"){
+%>
+<!-- Deleted Topic Content Area Start -->
+	<div class="span-20 topicLayoutContaniner" id="topicListingPage">
+		<div class="topicLayout">
+			<div class="left">
+				<div class="<%=topicObj.Topic_type_id %> left textIndent topicType"></div>
+			</div>
+			<div class="span-15">
+				<span class="topicTitle strong"><%= ccl.utils.escapeSpecialCharacters(topicObj.topic_title)%></span><br/>
+				<span><%if(topicObj.shared_type == "shared"){%>Shared<%}else{%>Archived<%}%> by </span>
+				<a href="#!/profile/<%= ccl.utils.encodePredefinedChars(topicObj.topic_author.screen_name)%>" class="linkToProfile">
+					<%= topicObj.topic_author.screen_name%>
+				</a>
+				<span> on <%= topicObj.topic_created_date%></span>
+				<%if(topicObj.inspired_by && topicObj.inspired_by.topic_ccl_id){%> 
+					<span> |</span>
+					<span> Inspired by </span> 
+					<a href="#!/topic/<%= topicObj.inspired_by.topic_ccl_id%>/<%= ccl.utils.encodePredefinedChars(topicObj.inspired_by.topic_title)%>" id="<%= topicObj.inspired_by.topic_ccl_id %>"><%= ccl.utils.escapeSpecialCharacters(topicObj.inspired_by.topic_title)%></a>
+					<span> by </span>
+					<a href="#!/profile/<%= ccl.utils.encodePredefinedChars(topicObj.inspired_by.topic_owner_name)%>" id="<%= topicObj.inspired_by.topic_owner_id%>">
+						<%= topicObj.inspired_by.topic_owner_name%>
+					</a>
+				<%}%>
+			</div>
+			<p class="clear"/>
+		</div>
+		<h4 class="margin-bottom10">Sorry, this topic has been deleted.</h4>
+		<% if(isPublicTopics){%>
+			<a href="#!/profile/<%= ccl.utils.encodePredefinedChars(topicObj.topic_author.screen_name)%>">View public topics by <%= topicObj.topic_author.screen_name%></a>
+		<%}%>
+	</div>
+<!-- Deleted Topic Content Area Ends -->
+<%
+	}else{
+%>
+<!-- Main Content Area Start -->
+            <div class="span-14 mainContent">
+                <div>
+                    <div>
+	                    <div class="<%=topicObj.Topic_type_id %> left smallIcons"><%=topicObj.Topic_type_name %></div>
+	                    <div class="right">
+							<%if(isAuthor){%><div class="<%= topicObj.shared_type%>"><%= topicObj.shared_type%></div><%}%>
+	                    </div>
+	                    <p class="clear" />
+                    </div>
+                    <div class="topicDetailsContainer" id="topicDetailsContainer">
+                        <h1><%= ccl.utils.escapeSpecialCharacters(topicObj.topic_title)%></h1>    
+                        <div class="topicDescription"><%= topicObj.topic_desc%></div>
+                        <%if(topicObj.Topic_type_id == "yesorno"){%>
+	                        <div class="left padding-right35">
+	                            <img src="ccl/img/yes_or_no.png" alt="yes or no" border="0px" />    
+	                        </div>
+							<div class="attachments left">
+							    <%if(topicObj.attachment_type == "photo"){%>
+							    <img class="photoAttachment" align="center" title="photo" src="ccl/img/spinner-black.gif"/>
+							    <%}%>
+							    <%if(topicObj.attachment_type == "video"){%>
+							    <%= topicObj.attachment_details%>
+							    <%}%>
+							    <%if(topicObj.attachment_type == "pdf"){%>
+							    <a href="<%= topicObj.attachment_details%>" target="_blank"><img src="ccl/img/pdf_icn.gif" alt="pdf" /></a>
+							    <%}%>
+							    <%if(topicObj.attachment_type == "document"){%>
+							    <a href="<%= topicObj.attachment_details%>"><img src="ccl/img/doc_icon.gif" alt="document" /></a>
+							    <%}%>
+							    <div class="attachmentTitleyesno">
+							     <%= topicObj.attachment_title%>
+							    </div>
+							</div>
+                        <%}else{%>
+							<div class="attachments <%if(topicObj.attachment_type == "video"){%>videoAttachment<%}%>">
+							    <%if(topicObj.attachment_type == "photo"){%>
+							    <img class="photoAttachment" title="photo"  src="ccl/img/spinner-black.gif"/>
+							    <%}%>
+							    <%if(topicObj.attachment_type == "video"){%>
+							    <%= topicObj.attachment_details%>
+							    <%}%>
+							    <%if(topicObj.attachment_type == "pdf"){%>
+							    <a href="<%= topicObj.attachment_details%>" target="_blank"><img src="ccl/img/pdf_icn.gif" alt="pdf" /></a>
+							    <%}%>
+							    <%if(topicObj.attachment_type == "document"){%>
+							    <a href="<%= topicObj.attachment_details%>" target="_blank"><img src="ccl/img/doc_icon.gif" alt="document" /></a>
+							    <%}%>
+							</div>
+							<div class="attachmentTitle <%if(topicObj.attachment_type == "video"){%>videoAttachmentTitle<%}%><%if(topicObj.attachment_type == "photo"){%>photoAttachmentTitle<%}%>">
+							     <%= topicObj.attachment_title%>
+							</div>
+							<%}%>
+							<%if(topicObj.multi_multi_topic && topicObj.multi_multi_topic>1) {%>
+											<div>Choose up to <%=topicObj.multi_multi_topic%> answers</div>
+											<%}%>
+											
+						<%if(voteChoicesCount!= 0){%>
+	                        <div class="selectOptions">
+	                            <div>
+	                            	<%for(var v = 0; v < voteChoicesCount; v++){%>
+	                                <div>
+										<div class="left">
+										<%
+										  if(topicObj.multi_multi_topic && topicObj.multi_multi_topic>1) {
+											%>
+												<input type="checkbox" name="checkbox" value="checkbox" />	
+											<%
+										  } else {
+											%>
+												<input type="radio" value="radio"/> 	
+											<%
+										  }
+										%>
+										</div>
+																			
+										<div class="left"><h4> <%=topicObj.vote_choice[v]%> </h4></div>
+										<p class="clear" />
+									</div>	
+	                                <%}%>     
+	                            </div>
+	                        </div>
+                        <%}%>
+                        <div class="comments">
+                            <div>
+                            	<%if(topicObj.Topic_type_id == "voteorsuggest"){%>
+                            		<h6 class="left">Be the first to submit an answer</h6>
+                            	<%}else{%>
+                            		<h6 class="left">Post a Comment</h6>
+                            	<%}%>
+								<p class="clear" />
+                            	<%if(topicObj.Topic_type_id == "yesorno"){%>
+                            	<img src="ccl/img/pro_con.png" alt="pro-con" class="proCon" /> 
+                            	<%}%>
+                            	<p class="clear" />
+                            </div>
+                            <img src="ccl/img/editor_strip.png" alt="editor" />                      
+						    <div class="editorContent">
+						    </div>
+                        </div>
+                    </div>
+                    <%if(topicObj.shared_type == "shared"){%>
+                    	<div class="user_comments">
+                    		<div class="commentsHeaderDiv">
+	                    		<span class="comments_heading">Comments</span>
+	                    		<% if(GLOBALS[10] == ""){ %>
+									<a class="linkToSignIn" href="javascript:;">Sign in to add a comment</a>
+								<% }%>
+							</div>
+                    		<div id="commentsPageContainer"></div>
+                    	</div>
+                    	
+                    <%}%>
+                </div>
+            </div>	
+		<!-- Main Content Area End -->
+        <!-- Right Side Content Area Start -->
+            <div id="rightContent" class="span-6 rightContent last">
+				
+				<div class="topicUserData">
+				   <a href="#!/profile/<%= ccl.utils.encodePredefinedChars(topicObj.topic_author.screen_name)%>"><img width="41px" height="40px" src="<%= topicObj.topic_author.large_image_url%>+'?'+<%=new Date().getTime()%>" alt="profile image" class="left" /></a>
+				   <div class="left">
+						<h4>by <a href="#!/profile/<%= ccl.utils.encodePredefinedChars(topicObj.topic_author.screen_name)%>" class="screenName"><%= topicObj.topic_author.screen_name%></a></h4>
+						<p class="clear"></p>   
+						<h5>(<%= topicObj.topic_author.first_last_name%>)</h5>
+						<h6><%if(topicObj.shared_type == "archive"){%>Archived<%}else{%>Shared<%}%> <%= topicObj.shared_on%> </h6>
+				   </div>
+				   <p class="clear"></p>   
+				</div>
+				<div class="copy-button-div">
+					<%if(additionalInfo.loggedInUser && isAuthor && sitesObj.length > 0){%>
+					<a href="javascript:void(0);" class="loggedInCopyButtonLarge" id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>">Copy to My Site</a>
+					<a href="javascript:void(0);" class="dropDownButtonLarge" tabindex="-1" id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>">&nbsp;</a>
+					<div class="copySiteDropDownContainer" style="position: relative;">
+					<ul class="copySiteDropDownLarge" id="dropDown<%= topicObj.ccl_topic_id%>" style="display:none;position: absolute;">
+						<li class="topicAction" id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>">Delete Topic</li>
+						<%if(topicObj.shared_type != "shared"){%>
+						<li class="topicAction" id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>">Share Topic</li>
+						<%}%>
+					</ul>
+					</div>
+				<%}else if(additionalInfo.loggedInUser && sitesObj.length > 0){%>
+					<a href="javascript:void(0);" class="copyButtonLarge" id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>">Copy to My Site</a>
+				<%}else if(additionalInfo.loggedInUser && sitesObj.length == 0){%>
+					<a href="javascript:void(0);" class="copyButtonLarge" id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>">Get this Topic</a>
+				<%}else{%>
+					<a href="javascript:void(0);" class="copyButtonLarge" id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>">Get this Topic</a>
+				<%}%>
+				</div>
+				<%if(topicObj.shared_type == "shared"){%>
+				<%if(topicObj.inspired_by && topicObj.inspired_by.topic_ccl_id){%>
+				<div class="topicDetailsRightContent">
+					<span>This topic was inspired by a topic <% if(topicObj.inspired_by.shared_type == "shared"){%>shared<%}else{%>archived<%}%> by </span>
+					<a href="#!/profile/<%= ccl.utils.encodePredefinedChars(topicObj.inspired_by.topic_owner_name)%>" id="<%= topicObj.inspired_by.topic_owner_id%>">
+						<%= topicObj.inspired_by.topic_owner_name%>:
+					</a>
+					<h5><a href="#!/topic/<%= topicObj.inspired_by.topic_ccl_id%>/<%= ccl.utils.encodePredefinedChars(topicObj.inspired_by.topic_title)%>" id="<%= topicObj.inspired_by.topic_ccl_id %>"><%= ccl.utils.escapeSpecialCharacters(topicObj.inspired_by.topic_title)%></a> </h5>
+				</div>
+				<%}%>
+				<div class="topicDetailsRightContent">
+					
+					<div class="left topicMetaData">
+						<div class="downloadCountData">
+						<%if(topicObj.num_downloads == 0){%>
+						<span><%= topicObj.num_downloads%> <%= downloadStaticText%></span><br/>
+						<%}else{%>
+						<a href="#!/topic/userslist/<%= topicObj.ccl_topic_id%>/<%= ccl.utils.encodePredefinedChars(topicObj.topic_title)%>"><%= topicObj.num_downloads%> <%= downloadStaticText%></a><br/>
+						<%}%>
+						</div>
+						<span id="totalCommentsCountMetaData">
+							<% if(topicObj.comments_count == 0){%>
+								<span><%= topicObj.comments_count%> <%= commentStaticText%></span><br/>
+							<%}else{%>
+								<a href="javascript:;" id="commentsCountLink"><%= topicObj.comments_count%> <%= commentStaticText%></a>
+							<%}%>
+						</span>
+						
+					</div>
+					<div class="left span-3">
+						<span>Avg User Rating</span>
+						<div>
+							<div class="starRating left <%if(!rateTopic && !avgRating){%>hide<%}%>" id="avgUserRatingDiv">
+								<input name="avgStar" type="radio" class="avgStar" value="1" />
+								<input name="avgStar" type="radio" class="avgStar" value="2" />
+								<input name="avgStar" type="radio" class="avgStar" value="3" />
+								<input name="avgStar" type="radio" class="avgStar" value="4" />
+								<input name="avgStar" type="radio" class="avgStar" value="5" />
+							</div>
+								<span class="starRatingCount starRating left <%if(!rateTopic && !avgRating){%>hide<%}%>" id="ratingsCountSpan">(<span id="ratingsCount"><%= topicObj.num_ratings%></span>)</span>
+							<p class="clear" />
+						</div>
+						<p class="count <%if(avgRating){%>hide<%}%>" id="noRatingYet">
+							No rating yet
+						</p>
+						
+					</div>
+					<p class="clear" />
+				</div>
+				<% if(!isAuthor){%>
+				<div class="topicDetailsRightContent">
+					
+					<%if(additionalInfo.loggedInUser){%>
+						<h4 class="left <%if(!rateTopic){%>hide<%}%>" id="yourRatingTitle">Your Rating: </h4>
+						<h4 class="left <%if(rateTopic){%>hide<%}%>" id="RateTopicTitle">Rate this Topic:</h4>
+						<div class="starRating left yourRating" id="yourRating">
+							<input name="userStar" type="radio" class="userStar myRating" value="1"  />
+							<input name="userStar" type="radio" class="userStar myRating" value="2"  />
+							<input name="userStar" type="radio" class="userStar myRating" value="3"  />
+							<input name="userStar" type="radio" class="userStar myRating" value="4"  />
+							<input name="userStar" type="radio" class="userStar myRating" value="5"  />
+						</div>
+						
+						<span class="left changeLink <%if(!rateTopic){%>hide<%}%>">(</span><a href="javascript:;" class="left changeLink <%if(!rateTopic){%>hide<%}%>" id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>">change</a><span class="left changeLink <%if(!rateTopic){%>hide<%}%>">)</span>
+						
+					
+						
+					<%}else{%>
+					
+						<h4 class="span-4">Have you used this topic?</h4>
+						<span><a href="javascript:void(0);"  id="<%= topicObj.ccl_topic_id%>" name="<%=topicObj.Topic_type_id %>" class="linkToSignIn">Sign in to rate it.</a></span>
+					<%}%>
+					<p class="clear" />
+				</div>
+				<%}%>
+				<div class="topicDetailsRightContent">
+					<h4>Subjects 
+					<%if(isAuthor){%>
+						<span id="subjectsEdit">
+							(<a href="javascript:void(0);" id="subjectsEditLink">edit</a>)
+						</span>
+					<%}%>
+					</h4>
+					<span id="subjectsList">
+					<%	for(var i = 0; i < subjectsCount; i++){
+						subjectObj =  topicObj.subjects[i];
+					%>
+						<span id="<%= subjectObj.subject.id%>"><%= subjectObj.subject.name%><%if(i < subjectsCount-1){%>,<%}%></span>
+					<%}%>
+					</span>
+					<%if(isAuthor){%>
+					<div id="listOfSubjects" style="display:none;">
+						<div class="selectList margin-bottom10">
+							<ul id="listOfSub">
+								<li><input type="checkbox" name="englishreading" value="English & Language Arts" />English & Language Arts</li>
+								<li><input type="checkbox" name="historySocialStudies" value="History & Social Studies" />History & Social Studies</li>
+								<li><input type="checkbox" name="mathIcon" value="Math" />Math</li>
+								<li><input type="checkbox" name="scienceTechnology" value="Science & Technology" />Science & Technology</li>
+								<li><input type="checkbox" name="languages" value="Foreign Languages" />Foreign Languages</li>
+								<li><input type="checkbox" name="healthLifeskills" value="Health & Life Skills" />Health & Life Skills</li>
+								<li><input type="checkbox" name="businessEconomics" value="Business & Economics" />Business & Economics</li>
+								<li><input type="checkbox" name="philosophyReligion" value="Philosophy & Religion" />Philosophy & Religion</li>
+								<li><input type="checkbox" name="visualPerformingArts" value="Visual & Performing Arts" />Visual & Performing Arts</li>
+								<li class="noborder"><input type="checkbox" name="crossCurricular" value="Cross Curricular" />Cross Curricular</li>
+							</ul>
+						</div>
+						<div id="subjectsError" class="errorMessage margin-bottom10 " style="display:none;"></div>
+						<div>
+							<a href="javascript:void(0)" class="saveChanges left" id="subjectsSave" name="<%=topicObj.ccl_topic_id %>">Save Changes</a> <span class="left cancelLink">or</span>
+							<a href="javascript:void(0)" class="left cancelLink" id="subjectsCancelLink">Cancel</a>
+							<p class="clear" />
+						</div>
+					</div>
+					<%}%>
+				</div>
+				<div class="topicDetailsRightContent">
+					<h4>Grade Levels 
+					<%if(isAuthor){%>
+						<span id="gradesEdit">
+							(<a href="javascript:void(0);" id="gradesEditLink">edit</a>)
+						</span>
+					<%}%>
+					</h4>
+					<span id="gradesList"> 
+					<%	for(var k = 0; k < gradesCount; k++){
+						gradeObj =  topicObj.grades[k];
+					%>
+						<span id="<%= gradeObj.grade.id%>"><%= gradeObj.grade.name%><%if(k < gradesCount-1){%>,<%}%></span>
+					<%}%>
+					</span>
+					<%if(isAuthor){%>
+					<div id="listOfGrades" style="display:none;">
+						<div class="selectList margin-bottom10">
+							<ul id="listOfGrds">
+								<li><input type="checkbox" name="higherEducation" value="Higher Education" />Higher Education</li>
+								<li><input type="checkbox" name="grades11-12" value="Grades 11-12" />Grades 11-12</li>
+								<li><input type="checkbox" name="grades9-10" value="Grades 9-10" />Grades 9-10</li>
+								<li><input type="checkbox" name="grades7-8" value="Grades 7-8" />Grades 7-8</li>
+								<li><input type="checkbox" name="grades5-6" value="Grades 5-6" />Grades 5-6</li>
+								<li><input type="checkbox" name="grades3-4" value="Grades 3-4" />Grades 3-4</li>
+								<li><input type="checkbox" name="grades1-2" value="Grades 1-2" />Grades 1-2</li>
+								<li><input type="checkbox" name="preschoolkindergarten" value="Preschool/Kindergarten" />Preschool/Kindergarten</li>
+								<li class="noborder"><input type="checkbox" name="professionalDevelopment" value="Professional Development" />Professional Development</li>
+							</ul>
+						</div>
+						<div id="gradesError" class="errorMessage margin-bottom10 " style="display:none;"></div>
+						<div>
+							<a href="javascript:void(0)" class="saveChanges left" id="gradesSave" name="<%=topicObj.ccl_topic_id %>">Save Changes</a> <span class="left cancelLink">or</span>
+							<a href="javascript:void(0)" class="left cancelLink" id="gradesCancelLink">Cancel</a>
+							<p class="clear" />
+						</div>
+					</div>
+					<%}%>
+				</div>
+				<%if(!isAuthor && (topicObj.author_notes == null ||topicObj.author_notes == "")){%>
+					
+				<%}else{%>
+				<div class="topicDetailsRightContent">
+					<h4>Author's Notes 
+						<%if(isAuthor){%>
+						<span id="authorEdit">
+							(<a href="javascript:void(0)" id="authorEditLink"><% if(topicObj.author_notes == "" || topicObj.author_notes == null){%>add<%}else{%>edit<%}%></a>)
+						</span>
+						<%}%>
+					</h4>
+					<span id="authorData"><% if(topicObj.author_notes) {%><%= (ccl.utils.nl2br(topicObj.author_notes))%>
+					 <%} %> </span>
+					<%if(isAuthor){%>
+					<div id="authorEditArea" style="display:none;">
+						<textarea id="authorDataArea" class="margin-bottom10"><%if(topicObj.author_notes){%><%=topicObj.author_notes%><%}%></textarea>
+						<div>
+							<a href="javascript:void(0)" class="saveChanges left" id="authorSave" name="<%=topicObj.ccl_topic_id %>"><% if(topicObj.author_notes == ""){%>Save<%}else{%>Save Changes<%}%></a> <span class="left cancelLink">or</span>
+							<a href="javascript:void(0)" class="left cancelLink" id="authorCancelLink">Cancel</a>
+							<p class="clear" />
+						</div>
+					</div>
+					<%}%>
+				</div>
+				<%}}%>
+				<%if(!isAuthor && tagsCount == 0){%>
+					
+				<%}else{%>
+				<div class="topicDetailsRightContent">
+					<h4>Tags <%if(isAuthor){%><span id="tagEdit">(<a href="javascript:;" id="tagsEditLink">add</a>)</span><%}%></h4>
+					<div id="authorTagArea" style="display:none;">
+						 <div  id="boxTagShare" class="boxTags">
+							<input type="hidden" id="hiddenTagsShare" />
+							<ul id="ulTags" class="tagsul">
+							<li id="newTagInputShare" class="newTagInput"> <input type="text"  id="inputTagShare" class="hint" value="Type new tag(s) Here" /> </li>
+							 </ul>
+							<p class="clear" />
+						</div>
+						<div>
+							<a href="javascript:void(0)" class="saveChanges left" id="tagsSave" name="<%=topicObj.ccl_topic_id %>">Save</a> <span class="left cancelLink">or</span>
+							<a href="javascript:void(0)" class="left cancelLink" id="tagsCancelLink">Cancel</a>
+							
+							<div class="loadingIcon showSaving left" style="display:none;">Saving..</div>
+							<p class="clear" />
+						</div>
+					</div>
+					<div id="displayTags">
+						<%if(isAuthor){%>
+						<ul>
+							<%for(var j = 0; j < tagsCount; j++){%>
+							<% 
+								tagsObj =  topicObj.tags[j];
+							%>
+								
+									<li id="tag-<%= tagsObj.tag.name%>"><a class="usersTagList" href="#!/topic/tag/<%= tagsObj.tag.name%>"><%= tagsObj.tag.name%></a> <a href="javascript:void(0);" class="close-icon" name="<%= tagsObj.tag.name%>">x</a>&nbsp;</li>
+								
+							<%}%>
+						</ul>
+						<%}else{%>
+							<%for(var j = 0; j < tagsCount; j++){%>
+							<% 
+								tagsObj =  topicObj.tags[j];
+							%>
+									<a class="usersTagList" href="#!/topic/tag/<%= tagsObj.tag.name%>"><%= tagsObj.tag.name%></a><%if(j < tagsCount-1){%>,<%}%>
+							<%}%>
+						<%}%>
+						<p class="clear" />
+					<div>
+					
+				</div>
+				<%}%>
+            </div>
+        <!-- Right Side Content Area End -->
+   <%}%>   

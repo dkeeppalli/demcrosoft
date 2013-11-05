@@ -1,0 +1,20 @@
+<% 
+	var attachmentObj = GLOBALS[15];
+	var attachmentdetailObj = GLOBALS[16];
+%>
+<div class="previewModal">
+	
+    <h1>Topic Preview</h1>
+    <img width="15" height="15" id="previewModalClose" alt="close" title="close" src="ccl/img/close_icon.gif">
+    <div class="text <%if(attachmentObj){%>margin-bottom10<%}%>">This is a preview of how this topic will display in your Collaborize Classroom site.</div>
+    <%if(attachmentObj == "document"){%>
+    	<a href="<%= attachmentdetailObj%>">Preview attached <%= attachmentObj%> &raquo;</a>
+    <%}%>
+    <%if(attachmentObj == "pdf"){%>
+    	<a href="<%= attachmentdetailObj%>" target="_blank">Preview attached <%= attachmentObj%> &raquo;</a>
+    <%}%>
+    <%if(attachmentObj == "video"){%>
+    	<a href="javascript:void(0);" id="videoAttachment">Preview attached <%= attachmentObj%> &raquo;</a>
+    <%}%>
+</div>
+  

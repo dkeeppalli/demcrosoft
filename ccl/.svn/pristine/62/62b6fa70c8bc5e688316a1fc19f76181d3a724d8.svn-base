@@ -1,0 +1,26 @@
+<div class="popup">
+  <div class="top">
+    <div class="left">
+    </div>
+    <div class="middle">
+    </div>
+    <div class="right">
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="middlebg">
+  	<div class="close">
+      <img src="/ccl/img/close_icon.gif"  width="15" height="15" title="close" alt="close" id="close"/>
+    </div>
+    <div id="popupContent"></div>    
+  </div>
+  <div class="bottom">
+    <div class="left">
+    </div>
+    <div class="middle">
+    </div>
+    <div class="right">
+    </div>
+    <p class="clear"/>
+  </div>
+</div>

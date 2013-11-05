@@ -1,0 +1,85 @@
+<div id="signInModal">
+  <div class="modal-header">
+    <div class="modal-title">
+      Sign In
+    </div>
+    <p class="clear"/>
+  </div>
+  <p>If you're an educator using Collaborize Classroom, you can sign in to the library with the login information for your site:</p>
+  <div class="signin-content">
+<form action="/" onsubmit="return false" id="signInFormClass">
+    <div class="sigin-fields" id="signInErrorDiv"  style="display:none;">
+	<div class="label">	
+	   &nbsp;
+       </div>
+      <div class="errorMessage" id="signInError">
+      </div>
+      <p class="clear"/>
+    </div>
+    <div class="sigin-fields">
+      <div class="label">
+        Email:
+      </div>
+      <div class="field">
+        <input id="userName" type="text" class="validate[required,funcCall[inputRequired,emptyEmail],custom[email]] text-input" name="email"/>
+      </div>
+      <p class="clear"/>
+    </div>
+    <div class="sigin-fields">
+      <div class="label">
+        Password:
+      </div>
+      <div class="field">
+        <input id="password" type="password" class="validate[required,funcCall[inputRequired,emptyPassword] text-input"/>
+      </div>
+      <p class="clear"/>
+    </div>
+    <div class="buttons">
+      <input id="signInButton" type="submit" value="Sign In" class="orange-button small-button" />
+      <a id="linkToForgotPassword" href="javascript:;" class="marginLeft92">Forgot your password?</a>
+	  <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+	  <p class="clear"/>
+    </div>
+  </div>
+  </form>
+  <div class="footerMessage">
+    <p>To register for the Collaborize Classroom Library, first <a href="<%= ccl.bundle.classroomURL%>/ccl_account.php?step=1&page=home" target="_blank" id="registration">create your FREE Collaborize Classroom site</a>.</p>
+  </div>
+</div>
+<div id="fgPwdModal" style="display:none;">
+  <div class="modal-title">
+    Forgot Password
+  </div>
+  <p class="clear"/>
+  <div id="forgotPasswordFeilds">
+  <p> Enter your email address and we'll send you instructions for resetting your password.</p>
+	  <div class="signin-content">
+	     <form id="forgotPasswordForm" method="post" action="" >
+		    <div class="sigin-fields">
+		      <div class="label">
+			Email:
+		      </div>
+		      <div class="field">
+			<input id="email" type="text" value="" class="validate[required,funcCall[inputRequired,emptyEmail],custom[email]] text-input" name="email"/>
+		      </div>
+		      <p class="clear"/>
+		    </div>
+		    <div class="buttons">
+		      <a id="backtoLogin" class="backtoLogin left" href="javascript:void(0);" >&laquo; Back to Login</a>
+			  <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+		      <input id="submitButton" type="button" value="Submit" class="orange-button submitbutton left" />
+			  <p class="clear"/>
+		    </div>
+	      </form>
+	  </div> 
+  </div>  
+  <div id="forgotPasswordConfirmation" style="display:none;">
+	    <div class="forgotPasswordConfirmation">We've sent you an email with instructions for resetting your password.</div>
+		<div class="forgotPasswordConfirmation">If you don't see it in your inbox,please also check your spam or junk folder. </div>
+	    <div>
+	      <a class="backtoLogin left" href="javascript:void(0);">&laquo; Back to Login</a>
+	      <p class="clear"/>
+	    </div>
+  </div>     
+</div>
+  

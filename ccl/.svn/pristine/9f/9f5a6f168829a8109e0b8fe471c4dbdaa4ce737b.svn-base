@@ -1,0 +1,87 @@
+<%
+	if(userlist.users){
+		var userOptions = userlist.users;
+		var cUsers = userOptions.length;
+		var userCountText = (userlist.users_count == 1 ? "user" : "users");
+	}var userObj = null;
+	
+	if(additionalInfo){
+		var sortOptionsObj = additionalInfo.sortOptionsObj;
+		var sortOptionsSelectKey = additionalInfo.selectKey;
+	}
+%>
+<div class="<%if(sortOptionsObj){%>span-20 topicLayoutContaniner<%}%>">
+	<%
+		if(userlist.users_count == 0 && sViewMode == 'searchList'){
+	%>
+	<h3 class="topicsCount <%if(additionalInfo.searchType == "all"){%>hide<%}%>">No Users Found</h3>
+	<span>We couldn't find any users matching your search for "<%~searchString %>"</span>
+	<%
+		}else{
+	%>
+	<%
+		if(additionalInfo.isUserListLoaderVisible && additionalInfo.searchType == "users"){
+	%>
+			<div class="margin-bottom10 count left sortText">
+				<%= userlist.users_count%> <%= userCountText%>
+			</div>
+	<%
+			if(cUsers > 1){
+	%>
+				<div class="count left sortText"> | </div> 
+	<%
+			}
+		}
+		if(additionalInfo.isUserListLoaderVisible && cUsers > 1){
+	%>
+		
+			<div class="userSortOptions">	
+				<div class="count left sortText">Sort by:</div>
+				<div class="left">
+					<select id="userSortOptions">
+					<% for(var i=0; i<sortOptionsObj.length; i++){ %>
+						<option value="<%=sortOptionsObj[i].value%>" <%=(sortOptionsObj[i].value == sortOptionsSelectKey? "selected" : "" )%> >
+							<%=sortOptionsObj[i].label%>
+						</option>
+					<% } %>
+					</select>
+				</div>
+				<p class="clear"/>
+			</div>
+	<%
+		}
+	}
+	for(var i=0; i<cUsers; i++){
+		userObj = userOptions[i].user || userOptions[i];
+%>
+<div class="userInfo">
+	<a href="#!/profile/<%= ccl.utils.encodePredefinedChars(userObj.profile_screen_name)%>"><img src="<%= userObj.large_url%>+'?'+<%=new Date().getTime()%>" alt="profile image" width="41px" height="40px"/></a>
+	<h3 id="screenName"><a href="#!/profile/<%= ccl.utils.encodePredefinedChars(userObj.profile_screen_name)%>"><strong><%= userObj.profile_screen_name%></strong></a></h3>
+	<h3><a href="#!/profile/<%= ccl.utils.encodePredefinedChars(userObj.profile_screen_name)%>">(<%= userObj.first_last_name%>)</a></h3>
+	<% if(userOptions[i].no_of_times_downloaded > 1) {%>
+	<span>(<%= userOptions[i].no_of_times_downloaded%> downloads) </span>
+	<%}%><br/>
+	<div class="left">
+	<% if(userObj.profile_role){%>
+	<span><%= userObj.profile_role%></span>
+	<%}%>
+	<% if(userObj.profile_role && (userObj.profile_school || userObj.profile_location)){%>
+	<span>|</span> 
+	<%}%>
+	<% if(userObj.profile_school){%>
+	<span><%= userObj.profile_school%></span>
+	<%}%>
+	<% if(userObj.profile_school && userObj.profile_location){%>
+	<span>|</span> 
+	<%}%>
+	<% if(userObj.profile_location){%>
+	<span><%= userObj.profile_location%></span>	
+	<%}%>
+	</div>
+	<p class="clear" />
+</div>
+<%
+	}
+%>
+
+</div>

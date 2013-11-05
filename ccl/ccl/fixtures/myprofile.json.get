@@ -1,0 +1,16 @@
+{
+"stat":"ok",
+"profileDetails":{
+     "email" : "blopez@morrowbayhigh.edu",
+     "screenName" : "Lopez History",
+	 "userName" : "Brian Lopez",
+	 "firstName" : "Brian",
+	 "lastName" : "Lopez",
+	 "noOfSharedTopics" : "5",
+	 "school" : "Morro Bay High School",
+	 "role": "9th Grade History Teacher",
+	 "website": "http://mbhs.slcusd.org",
+	 "memberSince": "December 8, 2010 ",
+	 "location": "Morro Bay, CA"
+     }
+}

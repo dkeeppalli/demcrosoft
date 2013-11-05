@@ -1,0 +1,28 @@
+<%
+	var browseOptions = browseData;
+	var stopicData = ccl.utils.encodePredefinedChars(browseOptions.browseFor);
+	var sActionString = browseOptions.browseFor;
+	var firstSlashIndex = sActionString.indexOf('/');
+    var topicId = sActionString.substring(0, firstSlashIndex);
+	var topicTitile = sActionString.substr(firstSlashIndex+1);
+	var sortOptionsObj = sortOptionsObj;
+%>
+<div id="topicListingPage" class="span-20 topicLayoutContaniner">
+<h3>Educators who have downloaded "<a href='#!/topic/<%= stopicData %>'><%= topicTitile%></a>":</h3>
+<div class="userInfo" id="downloadedUsersListContainer">
+	<div class="count left sortText hide downloadedUsersListContainer">Sort by:</div>
+	<div class="left hide downloadedUsersListContainer">
+		<select id="sortByUserOptions">
+			<% for(var i=0; i<sortOptionsObj.length; i++){ %>
+						<option value="<%=sortOptionsObj[i].value%>" id="<%=sortOptionsObj[i].sortOrder%>">
+							<%=sortOptionsObj[i].label%>
+						</option>
+			<% } %>
+		</select>
+	</div>
+	<p class="clear hide downloadedUsersListContainer" />
+</div>
+<div id="listContainer">
+	<div class="loadingIcon margin0">Loading..</div>
+</div>
+</div>

@@ -1,0 +1,43 @@
+<%
+	var oUser = userObj;
+%>
+<div class="modal-header">
+  <div class="modal-title">
+    Welcome, <%= oUser.user.firstName%>!
+  </div>
+  <p class="clear"/>
+</div>
+<p class="title">
+  Please create your Collaborize Classroom Library Profile
+</p>
+<p class="rigister-text">
+	  The Collaborize Classroom Topic Library was created for educators, by educators, and allows teachers anywhere to share individual question-based topics that have already proven successful in individual Collaborize Classroom sites. Create your profile now to begin sharing your own lesson plans and networking with other teachers like you!
+  </p>
+<div>
+<form action="/" onsubmit="return false" id="createProfileFormClass">
+  <p class="register-label">
+	  Your Library Screen Name <span>(required)</span>
+  </p>
+ <input type="text" class="validate[required,funcCall[inputRequired,emptyScreenName],custom[screenName]] text-input screen-field left" id="screenName"/>
+ <a href="javascript:void(0);" id="CheckAvailability" class="screenAvailability left">Check Availability</a>
+ <div style="display: none;" class="loadingIcon checkAvailability left">Checking..</div>
+ <p class="clear"/>
+ <span class="note">This is the primary way you'll be identified in the Library.  It may be different from the screen name(s) you use on your Collaborize Classroom site(s).</span>
+  <p class="register-label">
+    Your School Name
+  </p>
+  <input type="text" class="validate[optional,custom[schoolName]] register-field schoolName hint" id="schoolName" value="<%= oUser.user.schoolName%>"/>
+  <p class="register-label">
+    Your Role
+  </p>
+  <input type="text" class="validate[optional,custom[role]] register-field hint" id="role" value="ex. 10th Grade English Teacher"/>
+  <p class="register-label">
+    Your Location
+  </p>
+  <input type="text" class="validate[optional,custom[location]] register-field" id="location" value="ex. Santa Rosa, CA"/>
+  <input id="SaveMyProfileButton" type="button" value="Save My Profile" class="orange-button profilebutton" />
+  <div class="spinnerContainer"><table><tr><td class="spinner"></td><td>Please Wait..</td></tr></table></div>
+ 	<p class="clear"/>
+  </form>
+</div>
+  

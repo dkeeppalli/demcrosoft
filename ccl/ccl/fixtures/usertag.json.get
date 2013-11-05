@@ -1,0 +1,34 @@
+[
+	{ "tag": "algebra", "freq": "245" }
+	, { "tag": "art", "freq": "2" }
+	, { "tag": "cause", "freq": "2" }
+	, { "tag": "effect", "freq": "2" }
+	, { "tag": "comprehension", "freq": "2" }
+	, { "tag": "food chain", "freq": "2" }
+	, { "tag": "fractions", "freq": "2" }
+	, { "tag": "geometry", "freq": "2" }
+	, { "tag": "grammar", "freq": "2" }
+	, { "tag": "graphing", "freq": "2" }
+	, { "tag": "homophones", "freq": "120" }
+	, { "tag": "integers", "freq": "2" }
+	, { "tag": "language", "freq": "2" }
+	, { "tag": "arts", "freq": "2" }
+	, { "tag": "life cycle", "freq": "2" }
+	, { "tag": "math", "freq": "2" }
+	, { "tag": "measurment", "freq": "2" }
+	, { "tag": "phonics", "freq": "2" }
+	, { "tag": "plants", "freq": "2" }
+	, { "tag": "poetry", "freq": "2" }
+	, { "tag": "powerpoint", "freq": "2" }
+	, { "tag": "probability", "freq": "20" }
+	, { "tag": "pronoun", "freq": "2" }
+	, { "tag": "punctuation", "freq": "2" }
+	, { "tag": "reading", "freq": "40" }
+	, { "tag": "reading comprehension", "freq": "2" }
+	, { "tag": "scientce", "freq": "2" }
+	, { "tag": "sight words", "freq": "2" }
+	, { "tag": "social studies", "freq": "2" }
+	, { "tag": "solar system", "freq": "2" }
+	, { "tag": "water cycle", "freq": "2" }
+	, { "tag": "writing", "freq": "2" }
+]

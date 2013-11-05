@@ -1,0 +1,35 @@
+<div class="span-20 topicLayoutContaniner">
+<% 
+	var cTopics = topicsList.topics.length;
+	var sortOptionsObj = additionalInfo.sortOptionsObj;
+	if(cTopics == 0 && (sViewMode == 'searchList' || sViewMode == 'browseList')){
+%>
+<h3 class="topicsCount">No Topics Found</h3>
+<%if(searchOn != "rated"){%>
+<span>We couldn't find any topics matching your search for "<%~searchString %>"</span>
+<%}%>
+<%}	else {%>
+	<%if(sViewMode == 'searchList'){%>	
+	<div class="count left sortText">
+	<%= topicsList.topics_count%> <%if(topicsList.topics_count == 1){%>
+	  topic    
+	<%}%><%if(topicsList.topics_count > 1){%>
+	  topics  |  
+	<%}%>
+	</div>
+	<%}%>
+	
+	<%if(cTopics > 1){%>
+	<div class="count left sortText">Sort by:</div>
+	<div class="left">
+		<select id="sortByOptions">
+			<% for(var i=0; i<sortOptionsObj.length; i++){ %>
+				<option id="<%=sortOptionsObj[i].value%>" <%=(sortOptionsObj[i].value == ccl.utils.sortValueFullId(searchOn)? "selected" : "" )%> >
+					<%=sortOptionsObj[i].label%>
+				</option>
+			<% } %>
+		</select>
+	</div>
+	<%}%>
+<%}%>
+</div>
